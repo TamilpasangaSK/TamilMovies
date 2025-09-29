@@ -65,31 +65,35 @@ const Header = ({ onSearch }) => {
                     <span>Admin</span>
                   </Link>
                 )}
-                <button
-                  onClick={() => {
-                    setIsPremiumModalOpen(true);
-                    toggleMenu();
-                  }}
-                  className={`flex items-center space-x-2 transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 w-full text-left ${
-                    user.isPremium 
-                      ? 'text-yellow-400 hover:text-yellow-300' 
-                      : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
-                  }`}
-                >
-                  <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
-                  <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
-                </button>
-                <button
-                  onClick={() => setIsPremiumModalOpen(true)}
-                  className={`flex items-center space-x-2 transition-colors ${
-                    user.isPremium 
-                      ? 'text-yellow-400 hover:text-yellow-300' 
-                      : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
-                  }`}
-                >
-                  <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
-                  <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
-                </button>
+                {!user.isAdmin && (
+                  <button
+                    onClick={() => {
+                      setIsPremiumModalOpen(true);
+                      toggleMenu();
+                    }}
+                    className={`flex items-center space-x-2 transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 w-full text-left ${
+                      user.isPremium 
+                        ? 'text-yellow-400 hover:text-yellow-300' 
+                        : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
+                    }`}
+                  >
+                    <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
+                    <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
+                  </button>
+                )}
+                {!user.isAdmin && (
+                  <button
+                    onClick={() => setIsPremiumModalOpen(true)}
+                    className={`flex items-center space-x-2 transition-colors ${
+                      user.isPremium 
+                        ? 'text-yellow-400 hover:text-yellow-300' 
+                        : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
+                    }`}
+                  >
+                    <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
+                    <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
+                  </button>
+                )}
                 <button
                   onClick={handleLogout}
                   className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors"

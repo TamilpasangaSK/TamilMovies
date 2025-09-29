@@ -77,29 +77,23 @@ const MovieDetail = () => {
   };
 
   const generateDownloadLink = (quality, movie) => {
-    // Generate unique sample download links for each quality
-    const servers = [
-      'https://dl1.tamilmovieshub.com/movies/',
-      'https://dl2.tamilmovieshub.com/movies/',
-      'https://dl3.tamilmovieshub.com/movies/',
-      'https://mirror1.tmhub.net/downloads/',
-      'https://mirror2.tmhub.net/downloads/',
-      'https://server1.moviehub.in/files/',
-      'https://server2.moviehub.in/files/',
-      'https://cdn1.tamilhub.org/movies/',
-      'https://cdn2.tamilhub.org/movies/',
-      'https://storage.moviedownloads.net/films/'
+    // Working download links for different qualities
+    const downloadLinks = [
+      'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+      'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
     ];
     
-    // Use quality format to determine server (consistent per quality)
-    const serverIndex = quality.format.length % servers.length;
-    const baseUrl = servers[serverIndex];
-    
-    const cleanTitle = movie.title.replace(/[^a-zA-Z0-9]/g, '.');
-    const qualityType = quality.type !== 'standard' ? `.${quality.type.toUpperCase().replace('-', '.')}` : '';
-    const fileName = `${cleanTitle}.${movie.year}.${quality.format}${qualityType}.x265-TMB.mkv`;
-    
-    return `${baseUrl}${encodeURIComponent(fileName)}`;
+    // Use movie ID and quality format to determine link (consistent per movie/quality)
+    const linkIndex = (parseInt(movie.id) + quality.format.length) % downloadLinks.length;
+    return downloadLinks[linkIndex];
   };
 
   const generateFileDescription = (quality, movie) => {

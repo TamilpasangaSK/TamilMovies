@@ -15,11 +15,11 @@ export const dunePartTwo = {
   views: 2847392,
   uploadDate: '2024-03-15',
   quality: [
-    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://dl1.tamilmovieshub.com/movies/Dune.Part.Two.2024.480p.x265-TMB.mkv' },
-    { format: '720p', size: '2.8 GB', type: 'standard', link: 'https://dl2.tamilmovieshub.com/movies/Dune.Part.Two.2024.720p.x265-TMB.mkv' },
-    { format: '1080p', size: '4.5 GB', type: 'standard', link: 'https://dl3.tamilmovieshub.com/movies/Dune.Part.Two.2024.1080p.x265-TMB.mkv' },
-    { format: '1080p HDR', size: '6.2 GB', type: 'hdr', link: 'https://mirror1.tmhub.net/downloads/Dune.Part.Two.2024.1080p.HDR.x265-TMB.mkv' },
-    { format: '4K DV', size: '12.8 GB', type: '4k-dv', link: 'https://mirror2.tmhub.net/downloads/Dune.Part.Two.2024.4K.DV.x265-TMB.mkv' },
-    { format: '4K Blu-ray', size: '18.5 GB', type: 'blu-ray', link: 'https://server1.moviehub.in/files/Dune.Part.Two.2024.4K.Blu-ray.x265-TMB.mkv' }
+    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' },
+    { format: '720p', size: '2.8 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4' },
+    { format: '1080p', size: '4.5 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+    { format: '1080p HDR', size: '6.2 GB', type: 'hdr', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+    { format: '4K DV', size: '12.8 GB', type: '4k-dv', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+    { format: '4K Blu-ray', size: '18.5 GB', type: 'blu-ray', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' }
   ]
 };
