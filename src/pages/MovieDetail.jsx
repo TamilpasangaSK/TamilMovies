@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useMovies } from '../contexts/MovieContext';
 import { useAuth } from '../contexts/AuthContext';
-import { Star, Calendar, Clock, User, Download, Play, ArrowLeft, HardDrive, Eye, Award, Disc, Zap, Edit, Trash2 } from 'lucide-react';
+import { Star, Calendar, Clock, User, Download, Play, ArrowLeft, HardDrive, Eye, Award, Disc, Zap, CreditCard as Edit, Trash2 } from 'lucide-react';
 import TrailerModal from '../components/TrailerModal';
 import DownloadModal from '../components/DownloadModal';
 
