@@ -31,6 +31,7 @@ const HeroSlider = () => {
   };
 
   const formatViews = (views) => {
+    if (!views || views === 0) return '0';
     if (views >= 1000000) {
       return `${(views / 1000000).toFixed(1)}M`;
     } else if (views >= 1000) {

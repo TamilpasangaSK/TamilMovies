@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Film, Menu, X, Search, Home, Star, Calendar, User, Sun, Moon, Upload } from 'lucide-react';
+import { Film, Menu, X, Search, Home, Star, Calendar, User, Sun, Moon, Upload, Crown } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
+import PremiumModal from './PremiumModal';
 
 const Header = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
@@ -63,6 +65,31 @@ const Header = ({ onSearch }) => {
                     <span>Admin</span>
                   </Link>
                 )}
+                <button
+                  onClick={() => {
+                    setIsPremiumModalOpen(true);
+                    toggleMenu();
+                  }}
+                  className={`flex items-center space-x-2 transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 w-full text-left ${
+                    user.isPremium 
+                      ? 'text-yellow-400 hover:text-yellow-300' 
+                      : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
+                  }`}
+                >
+                  <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
+                  <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
+                </button>
+                <button
+                  onClick={() => setIsPremiumModalOpen(true)}
+                  className={`flex items-center space-x-2 transition-colors ${
+                    user.isPremium 
+                      ? 'text-yellow-400 hover:text-yellow-300' 
+                      : 'text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white'
+                  }`}
+                >
+                  <Crown className={`w-4 h-4 ${user.isPremium ? 'fill-yellow-400' : ''}`} />
+                  <span>{user.isPremium ? 'Premium' : 'Buy Premium'}</span>
+                </button>
                 <button
                   onClick={handleLogout}
                   className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors"
@@ -198,6 +225,13 @@ const Header = ({ onSearch }) => {
           </div>
         )}
       </div>
+
+      {/* Premium Modal */}
+      <PremiumModal
+        isOpen={isPremiumModalOpen}
+        onClose={() => setIsPremiumModalOpen(false)}
+        user={user}
+      />
     </header>
   );
 };

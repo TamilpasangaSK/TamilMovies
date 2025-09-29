@@ -202,11 +202,8 @@ const Login = () => {
             </div>
 
             {/* Demo Notice */}
-            <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
-              <p className="text-orange-300 text-sm text-center">
-                <strong>Demo Mode:</strong> This is a demonstration. No actual account will be created or database connection established.
-              </p>
-              <p className="text-orange-300 text-xs text-center mt-2">
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mt-6">
+              <p className="text-blue-300 text-sm text-center">
                 <strong>Admin Access:</strong> Use email "admin@tamilmovieshub.com" and password "admin123" for admin privileges.
               </p>
             </div>
