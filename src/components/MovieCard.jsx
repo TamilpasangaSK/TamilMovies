@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMovie } from '../contexts/MovieContext';
+import { useMovies } from '../contexts/MovieContext';
 import { useAuth } from '../contexts/AuthContext';
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
-  const { incrementViewCount } = useMovie();
+  const { incrementViews } = useMovies();
   const { user } = useAuth();
 
   const formatViews = (views) => {
@@ -21,12 +21,12 @@ const MovieCard = ({ movie }) => {
 
   const handleDownloadClick = (e) => {
     e.stopPropagation();
-    incrementViewCount(movie.id);
+    incrementViews(movie.id);
     navigate(`/movie/${movie.id}#download`);
   };
 
   const handleCardClick = () => {
-    incrementViewCount(movie.id);
+    incrementViews(movie.id);
     navigate(`/movie/${movie.id}`);
   };
 
