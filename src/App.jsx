@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
+import AdBlockDetector from './components/AdBlockDetector';
+import PopUnderAd from './components/PopUnderAd';
 import Home from './pages/Home';
 import MovieDetail from './pages/MovieDetail';
 import Login from './pages/Login';
@@ -19,6 +21,12 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+          {/* AdBlock Detection */}
+          <AdBlockDetector />
+          
+          {/* Pop-under Ads */}
+          <PopUnderAd />
+          
           <Header onSearch={handleSearch} />
           
           <Routes>

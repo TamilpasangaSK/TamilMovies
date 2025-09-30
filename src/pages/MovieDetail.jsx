@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Star, Calendar, Clock, User, Download, Play, ArrowLeft, HardDrive, Eye, Award, Disc, Zap, Edit, Trash2 } from 'lucide-react';
 import TrailerModal from '../components/TrailerModal';
 import DownloadModal from '../components/DownloadModal';
+import BannerAd from '../components/BannerAd';
 
 const MovieDetail = () => {
   const { movies, incrementViews, deleteMovie } = useMovies();
@@ -159,6 +160,11 @@ const MovieDetail = () => {
 
         <div className="relative z-10 flex items-center min-h-screen py-20">
           <div className="container mx-auto px-4">
+            {/* Banner Ad - Top */}
+            <div className="flex justify-center mb-8">
+              <BannerAd />
+            </div>
+            
             <div className="grid lg:grid-cols-5 gap-12 items-start">
               {/* Movie Poster */}
               <div className="lg:col-span-2 flex justify-center lg:justify-start">
@@ -296,6 +302,11 @@ const MovieDetail = () => {
       {/* Download Section */}
       <div className="bg-slate-900 dark:bg-slate-900 py-16">
         <div className="container mx-auto px-4">
+          {/* Banner Ad - Before Download Section */}
+          <div className="flex justify-center mb-12">
+            <BannerAd />
+          </div>
+          
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-white mb-4">Download Options</h2>
             <p className="text-gray-400 dark:text-gray-400 text-lg">Choose your preferred quality and start downloading</p>
@@ -332,6 +343,10 @@ const MovieDetail = () => {
             ))}
           </div>
 
+          {/* Banner Ad - After Download Options */}
+          <div className="flex justify-center mt-12">
+            <BannerAd />
+          </div>
           {/* Download Instructions */}
           <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 dark:border-white/10 mt-12">
             <h3 className="text-white dark:text-white font-bold text-xl mb-6 text-center">Download Instructions</h3>

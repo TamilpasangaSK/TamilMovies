@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import BannerAd from '../components/BannerAd';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -64,6 +65,11 @@ const Login = () => {
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-12">
+        {/* Banner Ad - Top */}
+        <div className="flex justify-center mb-8">
+          <BannerAd />
+        </div>
+        
         <div className="max-w-md mx-auto">
           {/* Back Button */}
           <Link
@@ -210,6 +216,11 @@ const Login = () => {
                 <strong>Admin Access:</strong> Use email "admin@tamilmovieshub.com" and password "admin123" for admin privileges.
               </p>
             </div>
+          </div>
+          
+          {/* Banner Ad - Bottom */}
+          <div className="flex justify-center mt-8">
+            <BannerAd />
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useMovies } from '../contexts/MovieContext';
 import HeroSlider from '../components/HeroSlider';
 import FilterBar from '../components/FilterBar';
 import MovieGrid from '../components/MovieGrid';
+import BannerAd from '../components/BannerAd';
 
 const Home = ({ searchQuery, pageType = 'home' }) => {
   const { movies } = useMovies();
@@ -100,6 +101,11 @@ const Home = ({ searchQuery, pageType = 'home' }) => {
       {!searchQuery && pageType === 'home' && <HeroSlider />}
       
       <div className="container mx-auto px-4 py-12">
+        {/* Banner Ad - Top */}
+        <div className="flex justify-center mb-8">
+          <BannerAd />
+        </div>
+        
         {/* Section Title */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white dark:text-white mb-4">
@@ -113,8 +119,18 @@ const Home = ({ searchQuery, pageType = 'home' }) => {
         {/* Filters */}
         <FilterBar filters={filters} onFilterChange={setFilters} />
 
+        {/* Banner Ad - Middle */}
+        <div className="flex justify-center my-8">
+          <BannerAd />
+        </div>
+
         {/* Movie Grid */}
         <MovieGrid movies={displayedMovies} />
+
+        {/* Banner Ad - Bottom */}
+        <div className="flex justify-center mt-8 mb-8">
+          <BannerAd />
+        </div>
 
         {/* Load More Button */}
         {hasMoreMovies && (

@@ -3,6 +3,7 @@ import { Link, useParams, Navigate, useNavigate } from 'react-router-dom';
 import { Upload, Film, Plus, X, Save, ArrowLeft, Image, Video, Star, Calendar, Clock, User, Eye } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useMovies } from '../contexts/MovieContext';
+import BannerAd from '../components/BannerAd';
 
 const AdminEdit = () => {
   const { user } = useAuth();
@@ -160,6 +161,11 @@ const AdminEdit = () => {
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-12">
+        {/* Banner Ad - Top */}
+        <div className="flex justify-center mb-8">
+          <BannerAd />
+        </div>
+        
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
@@ -352,6 +358,10 @@ const AdminEdit = () => {
               </div>
             </div>
 
+            {/* Banner Ad - Middle */}
+            <div className="flex justify-center my-8">
+              <BannerAd />
+            </div>
             {/* Genres */}
             <div className="mt-8">
               <h3 className="text-xl font-semibold text-white mb-4">Genres</h3>
@@ -577,6 +587,11 @@ const AdminEdit = () => {
               </p>
             </div>
           </form>
+          
+          {/* Banner Ad - Bottom */}
+          <div className="flex justify-center mt-8">
+            <BannerAd />
+          </div>
         </div>
       </div>
     </div>
