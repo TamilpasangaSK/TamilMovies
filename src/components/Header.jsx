@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import PremiumModal from './PremiumModal';
+import React from 'react';
 
 const Header = ({ isPremium, isAdmin }) => {
-  const { user } = useAuth();
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
-
-  const handlePremiumClick = () => {
-    setShowPremiumModal(true);
-  };
-
   return (
     <header className="header">
       <h1>TamilMovies</h1>
@@ -18,19 +9,9 @@ const Header = ({ isPremium, isAdmin }) => {
           {isPremium ? (
             <span className="crown gold">👑</span>
           ) : (
-            <button className="buy-premium" onClick={handlePremiumClick}>
-              Buy Premium
-            </button>
+            <button className="buy-premium">Buy Premium</button>
           )}
         </div>
-      )}
-      
-      {showPremiumModal && (
-        <PremiumModal 
-          isOpen={showPremiumModal}
-          onClose={() => setShowPremiumModal(false)}
-          isPremium={isPremium}
-        />
       )}
     </header>
   );
