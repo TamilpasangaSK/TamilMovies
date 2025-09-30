@@ -32,10 +32,6 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   };
 
   const handleDownloadClick = () => {
-    // Open the download link directly
-    if (downloadInfo?.link) {
-      window.open(downloadInfo.link, '_blank');
-    }
     setDownloadStarted(true);
   };
 

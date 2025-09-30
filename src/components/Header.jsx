@@ -1,296 +1,200 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, Film, User, LogOut } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { Film, Menu, X, Search, Home, Star, Calendar, User, Sun, Moon, Upload } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { user, logout } = useAuth();
-  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery('');
-      setIsMenuOpen(false);
-    }
+    onSearch(searchQuery);
+    navigate('/');
   };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleLogout = () => {
     logout();
-    navigate('/');
-    setIsMenuOpen(false);
+    alert('Logged out successfully!');
   };
 
   return (
-    <header className={`sticky top-0 z-50 ${isDark ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-sm border-b ${isDark ? 'border-gray-800' : 'border-gray-200'} transition-colors duration-200`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-slate-900/80 dark:bg-slate-900/80 border-b border-white/10 dark:border-white/10">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <Film className={`h-8 w-8 ${isDark ? 'text-red-500' : 'text-red-600'} group-hover:scale-110 transition-transform duration-200`} />
-            <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'} group-hover:text-red-500 transition-colors duration-200`}>
-              MovieHub
+          <Link to="/" className="flex items-center space-x-2 text-white dark:text-white hover:text-purple-400 transition-colors">
+            <Film className="w-8 h-8 text-purple-400" />
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent dark:from-purple-300 dark:to-pink-300">
+              TamilMoviesHub
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} font-medium transition-colors duration-200`}
-            >
-              Home
+            <Link to="/" className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors">
+              <Home className="w-4 h-4" />
+              <span>Home</span>
             </Link>
-            <Link 
-              to="/?genre=action" 
-              className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} font-medium transition-colors duration-200`}
-            >
-              Action
+            <Link to="/trending" className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors">
+              <Star className="w-4 h-4" />
+              <span>Trending</span>
             </Link>
-            <Link 
-              to="/?genre=comedy" 
-              className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} font-medium transition-colors duration-200`}
-            >
-              Comedy
+            <Link to="/latest" className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors">
+              <Calendar className="w-4 h-4" />
+              <span>Latest</span>
             </Link>
-            <Link 
-              to="/?genre=drama" 
-              className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} font-medium transition-colors duration-200`}
-            >
-              Drama
-            </Link>
+            {!user ? (
+              <Link to="/login" className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors">
+                <User className="w-4 h-4" />
+                <span>Login</span>
+              </Link>
+            ) : (
+              <>
+                {user.isAdmin && (
+                  <Link to="/admin/upload" className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors">
+                    <Upload className="w-4 h-4" />
+                    <span>Admin</span>
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </>
+            )}
           </nav>
 
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center">
+          {/* Search Bar & Theme Toggle */}
+          <div className="hidden md:flex items-center space-x-4">
+            <form onSubmit={handleSearch} className="flex items-center">
             <div className="relative">
-              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search movies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className={`pl-10 pr-4 py-2 w-64 rounded-lg border ${
-                  isDark 
-                    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-red-500' 
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-red-500'
-                } focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-colors duration-200`}
+                placeholder="Search movies..."
+                className="bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-white/20 dark:border-white/20 rounded-full py-2 px-10 text-white dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all w-64"
               />
             </div>
-          </form>
-
-          {/* User Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+            </form>
+            
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-lg ${
-                isDark 
-                  ? 'bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700' 
-                  : 'bg-gray-100 text-gray-700 hover:text-gray-900 hover:bg-gray-200'
-              } transition-colors duration-200`}
+              className="p-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
             >
-              {isDark ? '☀️' : '🌙'}
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
-
-            {user ? (
-              <div className="flex items-center space-x-3">
-                {user.role !== 'admin' && (
-                  <button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 rounded-lg font-medium hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 transform hover:scale-105">
-                    Premium
-                  </button>
-                )}
-                {user.role === 'admin' && (
-                  <div className="flex items-center space-x-2">
-                    <Link
-                      to="/admin/upload"
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
-                    >
-                      Upload
-                    </Link>
-                    <Link
-                      to="/admin/edit"
-                      className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors duration-200"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                )}
-                <div className="flex items-center space-x-2">
-                  <User className={`h-5 w-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
-                  <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                    {user.email}
-                  </span>
-                </div>
-                <button
-                  onClick={handleLogout}
-                  className={`p-2 rounded-lg ${
-                    isDark 
-                      ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  } transition-colors duration-200`}
-                >
-                  <LogOut className="h-5 w-5" />
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-3">
-                <button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 rounded-lg font-medium hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 transform hover:scale-105">
-                  Premium
-                </button>
-                <Link
-                  to="/login"
-                  className="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
-                >
-                  Login
-                </Link>
-              </div>
-            )}
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden p-2 rounded-lg ${
-              isDark 
-                ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-            } transition-colors duration-200`}
+            onClick={toggleMenu}
+            className="md:hidden p-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className={`md:hidden py-4 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
-            <div className="space-y-4">
-              {/* Mobile Search */}
-              <form onSubmit={handleSearch} className="px-2">
-                <div className="relative">
-                  <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
-                  <input
-                    type="text"
-                    placeholder="Search movies..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className={`pl-10 pr-4 py-2 w-full rounded-lg border ${
-                      isDark 
-                        ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-red-500' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-red-500'
-                    } focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-colors duration-200`}
-                  />
-                </div>
-              </form>
-
-              {/* Mobile Navigation */}
-              <nav className="space-y-2 px-2">
-                <Link 
-                  to="/" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 px-3 rounded-lg ${isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'} font-medium transition-colors duration-200`}
-                >
-                  Home
-                </Link>
-                <Link 
-                  to="/?genre=action" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 px-3 rounded-lg ${isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'} font-medium transition-colors duration-200`}
-                >
-                  Action
-                </Link>
-                <Link 
-                  to="/?genre=comedy" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 px-3 rounded-lg ${isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'} font-medium transition-colors duration-200`}
-                >
-                  Comedy
-                </Link>
-                <Link 
-                  to="/?genre=drama" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 px-3 rounded-lg ${isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'} font-medium transition-colors duration-200`}
-                >
-                  Drama
-                </Link>
-              </nav>
-
-              {/* Mobile User Actions */}
-              <div className="px-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Theme</span>
-                  <button
-                    onClick={toggleTheme}
-                    className={`p-2 rounded-lg ${
-                      isDark 
-                        ? 'bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700' 
-                        : 'bg-gray-100 text-gray-700 hover:text-gray-900 hover:bg-gray-200'
-                    } transition-colors duration-200`}
-                  >
-                    {isDark ? '☀️' : '🌙'}
-                  </button>
-                </div>
-
-                {user ? (
-                  <div className="space-y-3">
-                    {user.role !== 'admin' && (
-                      <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 rounded-lg font-medium hover:from-yellow-600 hover:to-orange-600 transition-all duration-200">
-                        Premium
-                      </button>
-                    )}
-                    {user.role === 'admin' && (
-                      <div className="space-y-2">
-                        <Link
-                          to="/admin/upload"
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 text-center"
-                        >
-                          Upload Movie
-                        </Link>
-                        <Link
-                          to="/admin/edit"
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block w-full bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors duration-200 text-center"
-                        >
-                          Edit Movies
-                        </Link>
-                      </div>
-                    )}
-                    <div className={`flex items-center space-x-2 p-2 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                      <User className={`h-5 w-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
-                      <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                        {user.email}
-                      </span>
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center justify-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
-                    >
-                      <LogOut className="h-5 w-5" />
-                      <span>Logout</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 rounded-lg font-medium hover:from-yellow-600 hover:to-orange-600 transition-all duration-200">
-                      Premium
-                    </button>
-                    <Link
-                      to="/login"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block w-full bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200 text-center"
-                    >
-                      Login
-                    </Link>
-                  </div>
-                )}
+          <div className="md:hidden bg-slate-800/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg mt-2 p-4 border border-white/10 dark:border-white/10">
+            {/* Mobile Search */}
+            <form onSubmit={handleSearch} className="mb-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search movies..."
+                  className="bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-white/20 dark:border-white/20 rounded-full py-2 px-10 text-white dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 w-full"
+                />
               </div>
+            </form>
+
+            {/* Theme Toggle Mobile */}
+            <div className="mb-4 flex justify-center">
+              <button
+                onClick={toggleTheme}
+                className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+              >
+                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+              </button>
             </div>
+
+            {/* Mobile Navigation */}
+            <nav className="flex flex-col space-y-3">
+              <Link
+                to="/"
+                onClick={toggleMenu}
+                className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+              >
+                <Home className="w-4 h-4" />
+                <span>Home</span>
+              </Link>
+              <Link
+                to="/trending"
+                onClick={toggleMenu}
+                className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+              >
+                <Star className="w-4 h-4" />
+                <span>Trending</span>
+              </Link>
+              <Link
+                to="/latest"
+                onClick={toggleMenu}
+                className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Latest</span>
+              </Link>
+              {!user ? (
+                <Link
+                  to="/login"
+                  onClick={toggleMenu}
+                  className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+                >
+                  <User className="w-4 h-4" />
+                  <span>Login</span>
+                </Link>
+              ) : (
+                <>
+                  {user.isAdmin && (
+                    <Link
+                      to="/admin/upload"
+                      onClick={toggleMenu}
+                      className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10"
+                    >
+                      <Upload className="w-4 h-4" />
+                      <span>Admin</span>
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      toggleMenu();
+                    }}
+                    className="flex items-center space-x-2 text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 w-full text-left"
+                  >
+                    <User className="w-4 h-4" />
+                    <span>Logout</span>
+                  </button>
+                </>
+              )}
+            </nav>
           </div>
         )}
       </div>

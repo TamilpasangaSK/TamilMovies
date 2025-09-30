@@ -12,13 +12,7 @@ export const useMovies = () => {
 };
 
 export const MovieProvider = ({ children }) => {
-  const [movies, setMovies] = useState(() => {
-    // Initialize movies with proper view counts
-    return initialMovies.map(movie => ({
-      ...movie,
-      views: movie.views || 0
-    }));
-  });
+  const [movies, setMovies] = useState(initialMovies);
 
   const addMovie = (movieData) => {
     // Generate unique ID
@@ -47,7 +41,7 @@ export const MovieProvider = ({ children }) => {
 
   const incrementViews = (id) => {
     setMovies(prev => prev.map(movie => 
-      movie.id === id ? { ...movie, views: (movie.views || 0) + 1 } : movie
+      movie.id === id ? { ...movie, views: movie.views + 1 } : movie
     ));
   };
 

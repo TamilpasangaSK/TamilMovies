@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useMovies } from '../contexts/MovieContext';
 import { useAuth } from '../contexts/AuthContext';
-import { Star, Calendar, Clock, User, Download, Play, ArrowLeft, HardDrive, Eye, Award, Disc, Zap, CreditCard as Edit, Trash2 } from 'lucide-react';
+import { Star, Calendar, Clock, User, Download, Play, ArrowLeft, HardDrive, Eye, Award, Disc, Zap, Edit, Trash2 } from 'lucide-react';
 import TrailerModal from '../components/TrailerModal';
 import DownloadModal from '../components/DownloadModal';
 
@@ -17,7 +17,6 @@ const MovieDetail = () => {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [downloadInfo, setDownloadInfo] = useState(null);
   const [hasViewCounted, setHasViewCounted] = useState(false);
-  const downloadSectionRef = useRef(null);
 
   // Increment view count when movie loads (only once per session)
   useEffect(() => {
@@ -25,26 +24,15 @@ const MovieDetail = () => {
       incrementViews(movie.id);
       setHasViewCounted(true);
     }
-    
-    // Scroll to download section if hash is present
-    if (window.location.hash === '#download' && downloadSectionRef.current) {
-      setTimeout(() => {
-        downloadSectionRef.current.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }, 100);
-    }
   }, [movie, hasViewCounted, incrementViews]);
 
   const formatViews = (views) => {
-    if (views === undefined || views === null || views === 0) return '0';
     if (views >= 1000000) {
       return `${(views / 1000000).toFixed(1)}M`;
     } else if (views >= 1000) {
       return `${(views / 1000).toFixed(1)}K`;
     }
-    return String(views);
+    return views.toString();
   };
 
   const getQualityIcon = (type) => {
@@ -88,23 +76,29 @@ const MovieDetail = () => {
   };
 
   const generateDownloadLink = (quality, movie) => {
-    // Working download links for different qualities
-    const downloadLinks = [
-      'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-      'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
+    // Generate unique sample download links for each quality
+    const servers = [
+      'https://dl1.tamilmovieshub.com/movies/',
+      'https://dl2.tamilmovieshub.com/movies/',
+      'https://dl3.tamilmovieshub.com/movies/',
+      'https://mirror1.tmhub.net/downloads/',
+      'https://mirror2.tmhub.net/downloads/',
+      'https://server1.moviehub.in/files/',
+      'https://server2.moviehub.in/files/',
+      'https://cdn1.tamilhub.org/movies/',
+      'https://cdn2.tamilhub.org/movies/',
+      'https://storage.moviedownloads.net/films/'
     ];
     
-    // Use movie ID and quality format to determine link (consistent per movie/quality)
-    const linkIndex = (parseInt(movie.id) + quality.format.length) % downloadLinks.length;
-    return downloadLinks[linkIndex];
+    // Use quality format to determine server (consistent per quality)
+    const serverIndex = quality.format.length % servers.length;
+    const baseUrl = servers[serverIndex];
+    
+    const cleanTitle = movie.title.replace(/[^a-zA-Z0-9]/g, '.');
+    const qualityType = quality.type !== 'standard' ? `.${quality.type.toUpperCase().replace('-', '.')}` : '';
+    const fileName = `${cleanTitle}.${movie.year}.${quality.format}${qualityType}.x265-TMB.mkv`;
+    
+    return `${baseUrl}${encodeURIComponent(fileName)}`;
   };
 
   const generateFileDescription = (quality, movie) => {
@@ -300,7 +294,7 @@ const MovieDetail = () => {
       </div>
 
       {/* Download Section */}
-      <div ref={downloadSectionRef} id="download" className="bg-slate-900 dark:bg-slate-900 py-16">
+      <div className="bg-slate-900 dark:bg-slate-900 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-white mb-4">Download Options</h2>

@@ -15,10 +15,10 @@ export const spiderManAcrossTheSpiderVerse = {
   views: 3456789,
   uploadDate: '2024-03-13',
   quality: [
-    { format: '720p', size: '1.48 GB', type: 'standard', link: 'https://gdflix.dev/file/eUZCsk8OaCrqGfn', description: 'Spider-Man Across the Spider-Verse 2023 720p AMZN WEB-DL MULTi AAC2.0 H.265-PMI-XDMovies.mkv' },
-    { format: '720p', size: '6.34 GB', type: 'standard', link: 'https://gdflix.dev/file/v1BGVodmwRNP3Sx', description: 'Spider-Man Across the Spider-Verse 2023 720p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
-    { format: '1080p', size: '5.71 GB', type: 'standard', link: 'https://gdflix.dev/file/YOlEcDoqVLgNL8m', description: 'Spider-Man Across the Spider-Verse 2023 1080p AMZN WEB-DL MULTi DDP5.1 H.265-PMI-XDMovies.mkv' },
-    { format: '1080p', size: '9.96 GB', type: 'hdr', link: 'https://gdflix.dev/file/37rjhUZzeFpPq43', description: 'Spider-Man Across the Spider-Verse 2023 1080p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
-    { format: '4K', size: '20.51 GB', type: '4k-dv', link: 'https://hubcloud.one/drive/cgf6mdpvigdcr3t', description: 'Spider-Man Across the Spider-Verse 2023 2160p AMZN WEB-DL DDP5.1 H.265-Tyrell.mkv' }
+    { format: '480p', size: '1.1 GB', type: 'standard', link: 'https://dl3.tamilmovieshub.com/movies/Spider-Man.Across.the.Spider-Verse.2023.480p.x265-TMB.mkv' },
+    { format: '720p', size: '2.5 GB', type: 'standard', link: 'https://mirror1.tmhub.net/downloads/Spider-Man.Across.the.Spider-Verse.2023.720p.x265-TMB.mkv' },
+    { format: '1080p', size: '4.2 GB', type: 'standard', link: 'https://mirror2.tmhub.net/downloads/Spider-Man.Across.the.Spider-Verse.2023.1080p.x265-TMB.mkv' },
+    { format: '4K DV', size: '11.8 GB', type: '4k-dv', link: 'https://server1.moviehub.in/files/Spider-Man.Across.the.Spider-Verse.2023.4K.DV.x265-TMB.mkv' },
+    { format: '4K Blu-ray', size: '16.5 GB', type: 'blu-ray', link: 'https://server2.moviehub.in/files/Spider-Man.Across.the.Spider-Verse.2023.4K.Blu-ray.x265-TMB.mkv' }
   ]
 };
