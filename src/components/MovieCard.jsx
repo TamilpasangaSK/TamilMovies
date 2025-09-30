@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMovies } from '../contexts/MovieContext';
 import { Star, Calendar, Clock, Download, Eye } from 'lucide-react';
 
 const MovieCard = ({ movie }) => {
   const { incrementViews } = useMovies();
+  const navigate = useNavigate();
 
   const formatViews = (views) => {
     if (views === undefined || views === null || views === 0) return '0';
@@ -19,6 +20,9 @@ const MovieCard = ({ movie }) => {
   const handleCardClick = () => {
     // Increment view count when card is clicked
     incrementViews(movie.id);
+    // Navigate directly to movie detail page with download section
+    const movieSlug = encodeURIComponent(movie.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''));
+    navigate(`/movie/${movieSlug}#download`);
   };
 
   return (
@@ -52,14 +56,13 @@ const MovieCard = ({ movie }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute bottom-4 left-4 right-4">
             <Link
-              to={`/movie/${movie.id}`}
-              to={`/movie/${encodeURIComponent(movie.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''))}`}
+            <button
               onClick={handleCardClick}
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center space-x-2"
             >
               <Download className="w-4 h-4" />
-              <span>View Details</span>
-            </Link>
+              <span>Download Now</span>
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useMovies } from '../contexts/MovieContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,12 +17,23 @@ const MovieDetail = () => {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [downloadInfo, setDownloadInfo] = useState(null);
   const [hasViewCounted, setHasViewCounted] = useState(false);
+  const downloadSectionRef = useRef(null);
 
   // Increment view count when movie loads (only once per session)
   useEffect(() => {
     if (movie && !hasViewCounted) {
       incrementViews(movie.id);
       setHasViewCounted(true);
+    }
+    
+    // Scroll to download section if hash is present
+    if (window.location.hash === '#download' && downloadSectionRef.current) {
+      setTimeout(() => {
+        downloadSectionRef.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
     }
   }, [movie, hasViewCounted, incrementViews]);
 
@@ -289,7 +300,7 @@ const MovieDetail = () => {
       </div>
 
       {/* Download Section */}
-      <div className="bg-slate-900 dark:bg-slate-900 py-16">
+      <div ref={downloadSectionRef} id="download" className="bg-slate-900 dark:bg-slate-900 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-white mb-4">Download Options</h2>
