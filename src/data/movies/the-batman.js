@@ -14,10 +14,10 @@ export const theBatman = {
   views: 1876543,
   uploadDate: '2024-03-11',
   quality: [
-    { format: '480p', size: '1.5 GB', type: 'standard' },
-    { format: '720p', size: '3.1 GB', type: 'standard' },
-    { format: '1080p', size: '5.2 GB', type: 'standard' },
-    { format: '1080p HDR', size: '7.5 GB', type: 'hdr' },
-    { format: '4K Blu-ray', size: '14.8 GB', type: 'blu-ray' }
+    { format: '720p', size: '1.48 GB', type: 'standard', link: 'https://gdflix.dev/file/eUZCsk8OaCrqGfn', description: 'The Batman 2022 720p AMZN WEB-DL MULTi AAC2.0 H.265-PMI-XDMovies.mkv' },
+    { format: '720p', size: '6.34 GB', type: 'standard', link: 'https://gdflix.dev/file/v1BGVodmwRNP3Sx', description: 'The Batman 2022 720p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '1080p', size: '5.71 GB', type: 'standard', link: 'https://gdflix.dev/file/YOlEcDoqVLgNL8m', description: 'The Batman 2022 1080p AMZN WEB-DL MULTi DDP5.1 H.265-PMI-XDMovies.mkv' },
+    { format: '1080p HDR', size: '9.96 GB', type: 'hdr', link: 'https://gdflix.dev/file/37rjhUZzeFpPq43', description: 'The Batman 2022 1080p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '4K', size: '20.51 GB', type: 'blu-ray', link: 'https://hubcloud.one/drive/cgf6mdpvigdcr3t', description: 'The Batman 2022 2160p AMZN WEB-DL DDP5.1 H.265-Tyrell.mkv' }
   ]
 };

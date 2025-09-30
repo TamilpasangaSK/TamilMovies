@@ -15,11 +15,10 @@ export const oppenheimer = {
   views: 1923847,
   uploadDate: '2024-03-14',
   quality: [
-    { format: '480p', size: '1.8 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-    { format: '720p', size: '3.2 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
-    { format: '1080p', size: '5.1 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
-    { format: '1080p HDR', size: '7.8 GB', type: 'hdr', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-    { format: '4K DV', size: '15.2 GB', type: '4k-dv', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' },
-    { format: '4K IMAX', size: '22.1 GB', type: 'imax', link: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4' }
+    { format: '720p', size: '1.48 GB', type: 'standard', link: 'https://gdflix.dev/file/eUZCsk8OaCrqGfn', description: 'Oppenheimer 2023 720p AMZN WEB-DL MULTi AAC2.0 H.265-PMI-XDMovies.mkv' },
+    { format: '720p', size: '6.34 GB', type: 'standard', link: 'https://gdflix.dev/file/v1BGVodmwRNP3Sx', description: 'Oppenheimer 2023 720p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '1080p', size: '5.71 GB', type: 'standard', link: 'https://gdflix.dev/file/YOlEcDoqVLgNL8m', description: 'Oppenheimer 2023 1080p AMZN WEB-DL MULTi DDP5.1 H.265-PMI-XDMovies.mkv' },
+    { format: '1080p HDR', size: '9.96 GB', type: 'hdr', link: 'https://gdflix.dev/file/37rjhUZzeFpPq43', description: 'Oppenheimer 2023 1080p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '4K IMAX', size: '20.51 GB', type: 'imax', link: 'https://hubcloud.one/drive/cgf6mdpvigdcr3t', description: 'Oppenheimer 2023 2160p AMZN WEB-DL DDP5.1 H.265-Tyrell.mkv' }
   ]
 };

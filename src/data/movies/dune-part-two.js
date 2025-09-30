@@ -15,11 +15,10 @@ export const dunePartTwo = {
   views: 2847392,
   uploadDate: '2024-03-15',
   quality: [
-    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' },
-    { format: '720p', size: '2.8 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4' },
-    { format: '1080p', size: '4.5 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-    { format: '1080p HDR', size: '6.2 GB', type: 'hdr', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
-    { format: '4K DV', size: '12.8 GB', type: '4k-dv', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-    { format: '4K Blu-ray', size: '18.5 GB', type: 'blu-ray', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' }
+    { format: '720p', size: '1.48 GB', type: 'standard', link: 'https://gdflix.dev/file/eUZCsk8OaCrqGfn', description: 'Dune Part Two 2024 720p AMZN WEB-DL MULTi AAC2.0 H.265-PMI-XDMovies.mkv' },
+    { format: '720p', size: '6.34 GB', type: 'standard', link: 'https://gdflix.dev/file/v1BGVodmwRNP3Sx', description: 'Dune Part Two 2024 720p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '1080p', size: '5.71 GB', type: 'standard', link: 'https://gdflix.dev/file/YOlEcDoqVLgNL8m', description: 'Dune Part Two 2024 1080p AMZN WEB-DL MULTi DDP5.1 H.265-PMI-XDMovies.mkv' },
+    { format: '1080p', size: '9.96 GB', type: 'hdr', link: 'https://gdflix.dev/file/37rjhUZzeFpPq43', description: 'Dune Part Two 2024 1080p AMZN WEB-DL MULTi DDP5.1 H.264-PMI-XDMovies.mkv' },
+    { format: '4K', size: '20.51 GB', type: '4k-dv', link: 'https://hubcloud.one/drive/cgf6mdpvigdcr3t', description: 'Dune Part Two 2024 2160p AMZN WEB-DL DDP5.1 H.265-Tyrell.mkv' }
   ]
 };
