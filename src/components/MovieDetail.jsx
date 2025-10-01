@@ -5,6 +5,8 @@
          return <Award className="w-8 h-8 text-white" />;
        case '4k-dv':
          return <Zap className="w-8 h-8 text-white" />;
+      case 'web-dl':
+        return <Award className="w-8 h-8 text-white" />;
        case 'blu-ray':
          return <Disc className="w-8 h-8 text-white" />;
        case 'imax':
@@ -15,6 +17,8 @@
 +        return <Zap className="w-8 h-8 text-white" />;
 +      case '144fps':
 +        return <Zap className="w-8 h-8 text-white" />;
+      case 'web-dl':
+        return 'from-emerald-600 to-green-600';
        default:
          return <HardDrive className="w-8 h-8 text-white" />;
      }

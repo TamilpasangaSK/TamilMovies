@@ -2,18 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const BannerAd = ({ className = "" }) => {
-  const { user } = useAuth();
   const adRef = useRef(null);
+  const { user } = useAuth();
 
   useEffect(() => {
-    // Don't load ads for admin users
-    if (user && user.isAdmin) {
-      return;
-    }
-
     // Clear any existing content
     if (adRef.current) {
       adRef.current.innerHTML = '';
+    }
+
+    // Don't load ads for admin users
+    if (user && user.isAdmin) {
+      return;
     }
 
     // Load banner ad script
