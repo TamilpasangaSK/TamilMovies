@@ -5,12 +5,12 @@ const BannerAd = ({ className = "" }) => {
   const { user } = useAuth();
   const adRef = useRef(null);
 
-  // Don't show ads for admin users
-  if (user && user.isAdmin) {
-    return null;
-  }
-
   useEffect(() => {
+    // Don't load ads for admin users
+    if (user && user.isAdmin) {
+      return;
+    }
+
     // Clear any existing content
     if (adRef.current) {
       adRef.current.innerHTML = '';
@@ -46,7 +46,12 @@ const BannerAd = ({ className = "" }) => {
         adRef.current.innerHTML = '';
       }
     };
-  }, []);
+  }, [user]);
+
+  // Don't show ads for admin users
+  if (user && user.isAdmin) {
+    return null;
+  }
 
   return (
     <div className={`banner-ad ${className}`}>

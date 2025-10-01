@@ -4,12 +4,12 @@ import { useAuth } from '../contexts/AuthContext';
 const PopUnderAd = () => {
   const { user } = useAuth();
 
-  // Don't show ads for admin users
-  if (user && user.isAdmin) {
-    return null;
-  }
-
   useEffect(() => {
+    // Don't load ads for admin users
+    if (user && user.isAdmin) {
+      return;
+    }
+
     // Load pop-under ad script
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -24,7 +24,12 @@ const PopUnderAd = () => {
         document.head.removeChild(script);
       }
     };
-  }, []);
+  }, [user]);
+
+  // Don't show ads for admin users
+  if (user && user.isAdmin) {
+    return null;
+  }
 
   // This component doesn't render anything visible
   return null;
