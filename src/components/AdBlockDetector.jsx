@@ -7,12 +7,12 @@ const AdBlockDetector = () => {
   const [isAdBlockDetected, setIsAdBlockDetected] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
 
-  // Don't show ads or adblock detection for admin users
-  if (user && user.isAdmin) {
-    return null;
-  }
-
   useEffect(() => {
+    // Don't run ad detection for admin users
+    if (user && user.isAdmin) {
+      return;
+    }
+
     const detectAdBlock = () => {
       // Create a test element that would be blocked by ad blockers
       const testAd = document.createElement('div');
@@ -46,7 +46,12 @@ const AdBlockDetector = () => {
 
     // Run detection after a short delay
     setTimeout(checkAdBlockers, 2000);
-  }, []);
+  }, [user]);
+
+  // Don't show ads or adblock detection for admin users
+  if (user && user.isAdmin) {
+    return null;
+  }
 
   if (!showWarning) return null;
 
