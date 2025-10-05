@@ -55,19 +55,20 @@ const HeroSlider = () => {
         >
           {/* Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
             style={{
               backgroundImage: `url('${movie.posterUrl}')`
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 dark:from-black/90 dark:via-black/60 dark:to-black/30"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent dark:from-black/80"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/40"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex items-center h-full">
+          <div className="relative z-10 flex items-center h-full px-4 sm:px-6 lg:px-8">
             <div className="container mx-auto px-4">
-              <div className="max-w-2xl">
+              <div className="max-w-4xl">
                 <div className="flex items-center space-x-4 mb-4">
                   <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                     Recent Upload
@@ -78,24 +79,24 @@ const HeroSlider = () => {
                   </div>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl font-bold text-white dark:text-white mb-4 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight">
                   {movie.title}
                 </h1>
                 
-                <div className="flex items-center space-x-4 mb-6">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-6 text-sm sm:text-base">
                   <span className="text-yellow-400 font-semibold">★ {movie.rating}</span>
-                  <span className="text-gray-300 dark:text-gray-300">{movie.year}</span>
-                  <span className="text-gray-300 dark:text-gray-300">{movie.duration}</span>
+                  <span className="text-gray-300">{movie.year}</span>
+                  <span className="text-gray-300">{movie.duration}</span>
                 </div>
 
-                <p className="text-lg md:text-xl text-gray-300 dark:text-gray-300 mb-8 leading-relaxed line-clamp-3">
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed line-clamp-2 sm:line-clamp-3 max-w-3xl">
                   {movie.description}
                 </p>
                 
-                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
                   <button
                     onClick={handleTrailerClick}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-8 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-6 sm:px-8 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base"
                   >
                     <Play className="w-5 h-5" />
                     <span>Watch Now</span>
@@ -103,7 +104,7 @@ const HeroSlider = () => {
                   
                   <Link
                     to={`/movie/${encodeURIComponent(movie.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''))}`}
-                    className="bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/20 dark:hover:bg-white/20 text-white dark:text-white py-3 px-8 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white py-3 px-6 sm:px-8 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base"
                   >
                     <Info className="w-5 h-5" />
                     <span>More Info</span>
@@ -111,7 +112,7 @@ const HeroSlider = () => {
                 </div>
 
                 {/* Quality badges */}
-                <div className="flex flex-wrap gap-2 mt-6">
+                <div className="flex flex-wrap gap-2">
                   {movie.quality.slice(0, 4).map((quality) => (
                     <span
                       key={quality.format}
@@ -160,7 +161,8 @@ const HeroSlider = () => {
       {/* Movie Counter */}
       <div className="absolute top-20 right-4 z-20 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-lg">
         <span className="text-sm">
-          {currentSlide + 1} / {recentMovies.length}
+          <span className="hidden sm:inline">{currentSlide + 1} / {recentMovies.length}</span>
+          <span className="sm:hidden">{currentSlide + 1}/{recentMovies.length}</span>
         </span>
       </div>
 
