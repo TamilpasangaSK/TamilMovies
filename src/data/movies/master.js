@@ -15,9 +15,9 @@ export const master = {
   views: 1932847,
   uploadDate: '2021-01-13',
   quality: [
-    { format: '2160p HEVC', size: '20.11 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/21594100582' },
-    { format: '1080p H.264', size: '13.14 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/14107679675' },
-    { format: '1080p HEVC', size: '7.71 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/8279357306' },
-    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/2563272865' }
+    { format: '2160p HEVC', size: '20.11 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4' },
+    { format: '1080p H.264', size: '13.14 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_60fps_normal.mp4' },
+    { format: '1080p HEVC', size: '7.71 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/ToS/tears_of_steel_1080p.mov' },
+    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/Sintel/sintel_trailer-1080p.mp4' }
   ]
 };

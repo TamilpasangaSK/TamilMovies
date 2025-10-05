@@ -14,10 +14,10 @@ export const blackPantherWakandaForever = {
   views: 1654321,
   uploadDate: '2024-03-08',
   quality: [
-    { format: '480p', size: '1.4 GB', type: 'standard' },
-    { format: '720p', size: '3.0 GB', type: 'standard' },
-    { format: '1080p', size: '4.9 GB', type: 'standard' },
-    { format: '1080p HDR', size: '7.1 GB', type: 'hdr' },
-    { format: '4K Blu-ray', size: '13.8 GB', type: 'blu-ray' }
+    { format: '480p', size: '1.4 GB', type: 'standard', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+    { format: '720p', size: '3.0 GB', type: 'standard', link: 'https://www.w3schools.com/html/movie.mp4' },
+    { format: '1080p', size: '4.9 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_1mb.mp4' },
+    { format: '1080p HDR', size: '7.1 GB', type: 'hdr', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_2mb.mp4' },
+    { format: '4K Blu-ray', size: '13.8 GB', type: 'blu-ray', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_640_3MG.mp4' }
   ]
 };

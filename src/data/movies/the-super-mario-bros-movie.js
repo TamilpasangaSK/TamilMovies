@@ -14,9 +14,9 @@ export const theSuperMarioBrosMovie = {
   views: 4567890,
   uploadDate: '2024-03-06',
   quality: [
-    { format: '480p', size: '0.8 GB', type: 'standard' },
-    { format: '720p', size: '1.9 GB', type: 'standard' },
-    { format: '1080p', size: '3.2 GB', type: 'standard' },
-    { format: '4K DV', size: '9.8 GB', type: '4k-dv' }
+    { format: '480p', size: '0.8 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_5mb.mp4' },
+    { format: '720p', size: '1.9 GB', type: 'standard', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' },
+    { format: '1080p', size: '3.2 GB', type: 'standard', link: 'https://vjs.zencdn.net/v/oceans.mp4' },
+    { format: '4K DV', size: '9.8 GB', type: '4k-dv', link: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4' }
   ]
 };

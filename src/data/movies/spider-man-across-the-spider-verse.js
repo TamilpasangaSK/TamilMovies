@@ -15,10 +15,10 @@ export const spiderManAcrossTheSpiderVerse = {
   views: 3456789,
   uploadDate: '2024-03-13',
   quality: [
-    { format: '480p', size: '1.1 GB', type: 'standard', link: 'https://dl3.tamilmovieshub.com/movies/Spider-Man.Across.the.Spider-Verse.2023.480p.x265-TMB.mkv' },
-    { format: '720p', size: '2.5 GB', type: 'standard', link: 'https://mirror1.tmhub.net/downloads/Spider-Man.Across.the.Spider-Verse.2023.720p.x265-TMB.mkv' },
-    { format: '1080p', size: '4.2 GB', type: 'standard', link: 'https://mirror2.tmhub.net/downloads/Spider-Man.Across.the.Spider-Verse.2023.1080p.x265-TMB.mkv' },
-    { format: '4K DV', size: '11.8 GB', type: '4k-dv', link: 'https://server1.moviehub.in/files/Spider-Man.Across.the.Spider-Verse.2023.4K.DV.x265-TMB.mkv' },
-    { format: '4K Blu-ray', size: '16.5 GB', type: 'blu-ray', link: 'https://server2.moviehub.in/files/Spider-Man.Across.the.Spider-Verse.2023.4K.Blu-ray.x265-TMB.mkv' }
+    { format: '480p', size: '1.1 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+    { format: '720p', size: '2.5 GB', type: 'standard', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+    { format: '1080p', size: '4.2 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1280x720_2mb.mp4' },
+    { format: '4K DV', size: '11.8 GB', type: '4k-dv', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_1920_18MG.mp4' },
+    { format: '4K Blu-ray', size: '16.5 GB', type: 'blu-ray', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_1280_10MG.mp4' }
   ]
 };

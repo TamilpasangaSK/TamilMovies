@@ -14,9 +14,9 @@ export const cocaineBear = {
   views: 1456789,
   uploadDate: '2024-03-17',
   quality: [
-    { format: '480p', size: '0.9 GB', type: 'standard' },
-    { format: '720p', size: '2.1 GB', type: 'standard' },
-    { format: '1080p', size: '3.8 GB', type: 'standard' },
-    { format: '4K Blu-ray', size: '12.4 GB', type: 'blu-ray' }
+    { format: '480p', size: '0.9 GB', type: 'standard', link: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4' },
+    { format: '720p', size: '2.1 GB', type: 'standard', link: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm' },
+    { format: '1080p', size: '3.8 GB', type: 'standard', link: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav' },
+    { format: '4K Blu-ray', size: '12.4 GB', type: 'blu-ray', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_480_1_5MG.mp4' }
   ]
 };

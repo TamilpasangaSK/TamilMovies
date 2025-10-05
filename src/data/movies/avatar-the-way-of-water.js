@@ -14,11 +14,11 @@ export const avatarTheWayOfWater = {
   views: 4123456,
   uploadDate: '2024-03-09',
   quality: [
-    { format: '480p', size: '1.8 GB', type: 'standard' },
-    { format: '720p', size: '3.5 GB', type: 'standard' },
-    { format: '1080p', size: '5.8 GB', type: 'standard' },
-    { format: '1080p HDR', size: '8.2 GB', type: 'hdr' },
-    { format: '4K DV', size: '16.5 GB', type: '4k-dv' },
-    { format: '4K IMAX', size: '24.1 GB', type: 'imax' }
+    { format: '480p', size: '1.8 GB', type: 'standard', link: 'https://techslides.com/demos/sample-videos/small.mp4' },
+    { format: '720p', size: '3.5 GB', type: 'standard', link: 'https://www.exit109.com/~dnn/clips/RW20seconds_1.mp4' },
+    { format: '1080p', size: '5.8 GB', type: 'standard', link: 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' },
+    { format: '1080p HDR', size: '8.2 GB', type: 'hdr', link: 'https://player.vimeo.com/external/194837908.sd.mp4' },
+    { format: '4K DV', size: '16.5 GB', type: '4k-dv', link: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+    { format: '4K IMAX', size: '24.1 GB', type: 'imax', link: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' }
   ]
 };
