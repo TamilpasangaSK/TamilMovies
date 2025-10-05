@@ -3,12 +3,12 @@ import { X, Download, FileText, HardDrive, Clock, CheckCircle } from 'lucide-rea
 
 const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
     if (isOpen) {
       setDownloadStarted(false);
-      setCountdown(5);
+      setCountdown(3);
     }
   }, [isOpen]);
 
@@ -17,26 +17,14 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      // Start actual download
+      // Start download and close modal
       if (downloadInfo?.link) {
-        // Create a temporary anchor element to trigger download
-        const link = document.createElement('a');
-        link.href = downloadInfo.link;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.download = downloadInfo.description || 'movie-download';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Also open in new tab as backup
-        setTimeout(() => {
-          window.open(downloadInfo.link, '_blank', 'noopener,noreferrer');
-        }, 500);
+        window.open(downloadInfo.link, '_blank');
+        onClose(); // Close modal after download starts
       }
     }
     return () => clearTimeout(timer);
-  }, [downloadStarted, countdown, downloadInfo]);
+  }, [downloadStarted, countdown, downloadInfo, onClose]);
 
   if (!isOpen || !downloadInfo) return null;
 
@@ -47,7 +35,14 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   };
 
   const handleDownloadClick = () => {
-    setDownloadStarted(true);
+    // Start download immediately
+    if (downloadInfo?.link) {
+      // Open the download link in a new tab
+      window.open(downloadInfo.link, '_blank');
+      setDownloadStarted(true);
+    } else {
+      alert('Download link not available');
+    }
   };
 
   return (
@@ -134,17 +129,8 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </div>
           )}
 
-          {/* Demo Notice */}
-          <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
-            <p className="text-orange-300 text-sm text-center">
-              <strong>Note:</strong> These are sample download links for demonstration purposes.
-            </p>
-            <p className="text-orange-300 text-xs text-center mt-2">
-              <strong>Contact:</strong> Telegram @TMB_Rips for actual movie files.
-            </p>
           </div>
         </div>
-      </div>
     </div>
   );
 };
