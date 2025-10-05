@@ -17,8 +17,23 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      // Simulate download start
-      window.open(downloadInfo?.link, '_blank');
+      // Start actual download
+      if (downloadInfo?.link) {
+        // Create a temporary anchor element to trigger download
+        const link = document.createElement('a');
+        link.href = downloadInfo.link;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.download = downloadInfo.description || 'movie-download';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Also open in new tab as backup
+        setTimeout(() => {
+          window.open(downloadInfo.link, '_blank', 'noopener,noreferrer');
+        }, 500);
+      }
     }
     return () => clearTimeout(timer);
   }, [downloadStarted, countdown, downloadInfo]);
@@ -122,7 +137,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
           {/* Demo Notice */}
           <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
             <p className="text-orange-300 text-sm text-center">
-              <strong>Telegram</strong> @TMB_Rips
+              <strong>Note:</strong> These are sample download links for demonstration purposes.
+            </p>
+            <p className="text-orange-300 text-xs text-center mt-2">
+              <strong>Contact:</strong> Telegram @TMB_Rips for actual movie files.
             </p>
           </div>
         </div>
