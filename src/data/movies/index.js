@@ -15,7 +15,7 @@ import { creedIII } from './creed-iii';
 import { theSuperMarioBrosMovie } from './the-super-mario-bros-movie';
 import { transformersRiseOfTheBeasts } from './transformers-rise-of-the-beasts';
 import { master } from './master';
-import { Akkenam } from './Akkenam';
+import { Akkenam } from './akkenam';
 import { Andhera_Season_1 } from './Andhera_Season_1';
 import { Butterfly_Season_1 } from './Butterfly_Season_1';
 import { Good_Day } from './Good_Day';
@@ -44,7 +44,7 @@ export const movies = [
   theSuperMarioBrosMovie,
   transformersRiseOfTheBeasts,
   master,
-  Akkenam,
+  akkenam,
   Andhera_Season_1,
   Butterfly_Season_1,
   Good_Day,
@@ -73,7 +73,7 @@ export * from './creed-iii';
 export * from './the-super-mario-bros-movie';
 export * from './transformers-rise-of-the-beasts';
 export * from './master';
-export * from './Akkenam';
+export * from './akkenam';
 export * from './Andhera_Season_1';
 export * from './Butterfly_Season_1';
 export * from './Good_Day';
