@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { X, Download, FileText, HardDrive, Clock, CheckCircle } from 'lucide-react';
+import { X, Download, FileText, HardDrive, Clock, CheckCircle, ExternalLink } from 'lucide-react';
 
 const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [countdown, setCountdown] = useState(3);
+  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     if (isOpen) {
       setDownloadStarted(false);
-      setCountdown(3);
+      setCountdown(5);
     }
   }, [isOpen]);
 
@@ -17,10 +17,12 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      // Start download and close modal
+      // Direct redirect to download link
       if (downloadInfo?.link) {
-        window.open(downloadInfo.link, '_blank');
-        onClose(); // Close modal after download starts
+        window.location.href = downloadInfo.link;
+        setTimeout(() => {
+          onClose();
+        }, 1000);
       }
     }
     return () => clearTimeout(timer);
@@ -35,13 +37,18 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   };
 
   const handleDownloadClick = () => {
-    // Start download immediately
     if (downloadInfo?.link) {
-      // Open the download link in a new tab
-      window.open(downloadInfo.link, '_blank');
       setDownloadStarted(true);
     } else {
       alert('Download link not available');
+    }
+  };
+
+  const handleDirectDownload = () => {
+    if (downloadInfo?.link) {
+      // Direct download without countdown
+      window.location.href = downloadInfo.link;
+      onClose();
     }
   };
 
@@ -88,6 +95,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
                     <FileText className="w-4 h-4" />
                     <span>Size: {downloadInfo.quality.size}</span>
                   </div>
+                  <div className="flex items-center space-x-2 text-gray-300">
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Type: {downloadInfo.quality.type}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,15 +115,25 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </p>
           </div>
 
-          {/* Download Button or Countdown */}
+          {/* Download Buttons */}
           {!downloadStarted ? (
-            <button
-              onClick={handleDownloadClick}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
-            >
-              <Download className="w-5 h-5" />
-              <span>Start Download</span>
-            </button>
+            <div className="space-y-3">
+              <button
+                onClick={handleDownloadClick}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
+              >
+                <Download className="w-5 h-5" />
+                <span>Start Download (5s countdown)</span>
+              </button>
+              
+              <button
+                onClick={handleDirectDownload}
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2"
+              >
+                <ExternalLink className="w-5 h-5" />
+                <span>Direct Download (No countdown)</span>
+              </button>
+            </div>
           ) : (
             <div className="text-center">
               {countdown > 0 ? (
@@ -129,8 +150,17 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </div>
           )}
 
+          {/* Demo Notice */}
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mt-6">
+            <p className="text-blue-300 text-sm text-center">
+              <strong>Demo Mode:</strong> These are sample video files for demonstration purposes.
+            </p>
+            <p className="text-blue-300 text-xs text-center mt-2">
+              For actual movie files, contact: <strong>@TMB_Rips</strong> on Telegram
+            </p>
           </div>
         </div>
+      </div>
     </div>
   );
 };

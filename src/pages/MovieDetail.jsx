@@ -106,7 +106,7 @@ const MovieDetail = () => {
   };
 
   const handleDownload = (quality, movie) => {
-    const downloadLink = quality.link || generateDownloadLink(quality, movie);
+    const downloadLink = quality.link;
     const fileDescription = quality.description || generateFileDescription(quality, movie);
     
     setDownloadInfo({

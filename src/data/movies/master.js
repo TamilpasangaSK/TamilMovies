@@ -15,9 +15,9 @@ export const master = {
   views: 1932847,
   uploadDate: '2021-01-13',
   quality: [
-    { format: '2160p HEVC', size: '20.11 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4' },
-    { format: '1080p H.264', size: '13.14 GB', type: 'web-dl', link: 'https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_60fps_normal.mp4' },
-    { format: '1080p HEVC', size: '7.71 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/2563272865' },
-    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/21594100582' }
+    { format: '2160p HEVC', size: '20.11 GB', type: 'web-dl', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' },
+    { format: '1080p H.264', size: '13.14 GB', type: 'web-dl', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_5mb.mp4' },
+    { format: '1080p HEVC', size: '7.71 GB', type: 'web-dl', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_1280_10MG.mp4' },
+    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://www.w3schools.com/html/mov_bbb.mp4' }
   ]
 };
