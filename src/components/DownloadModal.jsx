@@ -3,12 +3,12 @@ import { X, Download, FileText, HardDrive, Clock, CheckCircle, ExternalLink } fr
 
 const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(300); // 5 minutes = 300 seconds
 
   useEffect(() => {
     if (isOpen) {
       setDownloadStarted(false);
-      setCountdown(5);
+      setCountdown(300);
     }
   }, [isOpen]);
 
@@ -44,12 +44,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     }
   };
 
-  const handleDirectDownload = () => {
-    if (downloadInfo?.link) {
-      // Direct download without countdown
-      window.location.href = downloadInfo.link;
-      onClose();
-    }
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -117,29 +115,19 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
 
           {/* Download Buttons */}
           {!downloadStarted ? (
-            <div className="space-y-3">
-              <button
-                onClick={handleDownloadClick}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
-              >
-                <Download className="w-5 h-5" />
-                <span>Start Download (5s countdown)</span>
-              </button>
-              
-              <button
-                onClick={handleDirectDownload}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2"
-              >
-                <ExternalLink className="w-5 h-5" />
-                <span>Direct Download (No countdown)</span>
-              </button>
-            </div>
+            <button
+              onClick={handleDownloadClick}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
+            >
+              <Download className="w-5 h-5" />
+              <span>Start Download (5 min countdown)</span>
+            </button>
           ) : (
             <div className="text-center">
               {countdown > 0 ? (
                 <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
                   <Clock className="w-5 h-5" />
-                  <span>Download starting in {countdown}s...</span>
+                  <span>Download starting in {formatTime(countdown)}...</span>
                 </div>
               ) : (
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
@@ -153,10 +141,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
           {/* Demo Notice */}
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mt-6">
             <p className="text-blue-300 text-sm text-center">
-              <strong>Demo Mode:</strong> These are sample video files for demonstration purposes.
+              <strong>Download Notice:</strong> Please wait for the countdown to complete before your download begins.
             </p>
             <p className="text-blue-300 text-xs text-center mt-2">
-              For actual movie files, contact: <strong>@TMB_Rips</strong> on Telegram
+              For support or issues, contact: <strong>@TMB_Rips</strong> on Telegram
             </p>
           </div>
         </div>
