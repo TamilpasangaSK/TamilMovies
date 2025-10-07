@@ -18,6 +18,6 @@ export const master = {
     { format: '2160p HEVC', size: '20.11 GB', type: 'web-dl', link: 'https://new27.gdtot.dad/file/21594100582' },
     { format: '1080p H.264', size: '13.14 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/14107679675' },
     { format: '1080p HEVC', size: '7.71 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/8279357306' },
-    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://new19.gdtot.dad/file/2563272865' }
+    { format: '720p HEVC', size: '2.39 GB', type: 'web-dl', link: 'https://u.pcloud.link/publink/show?code=XZYD015Z8QVuNKU9wiu78Hx8FtCBeXdFBwz7' }
   ],
 };
