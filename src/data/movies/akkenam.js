@@ -1,6 +1,6 @@
 export const akkenam = {
   id: '746',
-  title: 'Akkenam',
+  title: 'akkenam',
   year: 2025,
   genre: ['Drama', 'Thriller', 'Mystery'],
   languages: ['Tamil'],
