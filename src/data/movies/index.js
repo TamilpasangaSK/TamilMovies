@@ -15,6 +15,16 @@ import { creedIII } from './creed-iii';
 import { theSuperMarioBrosMovie } from './the-super-mario-bros-movie';
 import { transformersRiseOfTheBeasts } from './transformers-rise-of-the-beasts';
 import { master } from './master';
+import { Akkenam } from './Akkenam';
+import { Andhera_Season_1 } from './Andhera_Season_1';
+import { Butterfly_Season_1 } from './Butterfly_Season_1';
+import { Good_Day } from './Good_Day';
+import { How_to_Train_Your_Dragon } from './How_to_Train_Your_Dragon';
+import { J_S_K_Janaki_v_v_S_State_of_Kerala } from './J.S.K_Janaki_v.v_S_State_of_Kerala';
+import { Mission_Impossible_The_Final_Reckoning } from './Mission_Impossible_The_Final_Reckoning';
+import { Night_Always_Comes } from './Night_Always_Comes';
+import { Sausage_Party_Foodtopia_Season_2 } from './Sausage_Party_Foodtopia - Season 2';
+import { Yaadhum_Ariyaan_2025 } from './Yaadhum_Ariyaan_2025';
 
 export const movies = [
   dunePartTwo,
@@ -34,6 +44,16 @@ export const movies = [
   theSuperMarioBrosMovie,
   transformersRiseOfTheBeasts,
   master,
+  Akkenam,
+  Andhera_Season_1,
+  Butterfly_Season_1,
+  Good_Day,
+  How_to_Train_Your_Dragon,
+  J_S_K_Janaki_v_v_S_State_of_Kerala,
+  Mission_Impossible_The_Final_Reckoning,
+  Night_Always_Comes,
+  Sausage_Party_Foodtopia_Season_2,
+  Yaadhum_Ariyaan_2025,
 ];
 
 export * from './dune-part-two';
@@ -53,6 +73,16 @@ export * from './creed-iii';
 export * from './the-super-mario-bros-movie';
 export * from './transformers-rise-of-the-beasts';
 export * from './master';
+export * from './Akkenam';
+export * from './Andhera_Season_1';
+export * from './Butterfly_Season_1';
+export * from './Good_Day';
+export * from './How_to_Train_Your_Dragon';
+export * from './J.S.K_Janaki_v.v_S_State_of_Kerala';
+export * from './Mission_Impossible_The_Final_Reckoning';
+export * from './Night_Always_Comes';
+export * from './Sausage_Party_Foodtopia - Season 2';
+export * from './Yaadhum_Ariyaan_2025';
 
 // Extract unique genres from all movies
 export const genres = Array.from(
