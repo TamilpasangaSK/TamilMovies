@@ -3,12 +3,12 @@ import { X, Download, FileText, HardDrive, Clock, CheckCircle, ExternalLink } fr
 
 const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [countdown, setCountdown] = useState(300); // 5 minutes = 300 seconds
+  const [countdown, setCountdown] = useState(5); // 5 seconds
 
   useEffect(() => {
     if (isOpen) {
       setDownloadStarted(false);
-      setCountdown(300);
+      setCountdown(5);
     }
   }, [isOpen]);
 
@@ -45,9 +45,7 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   };
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${seconds}`;
   };
 
   return (
@@ -120,14 +118,14 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
             >
               <Download className="w-5 h-5" />
-              <span>Start Download (5 min countdown)</span>
+              <span>Start Download (5 sec countdown)</span>
             </button>
           ) : (
             <div className="text-center">
               {countdown > 0 ? (
                 <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
                   <Clock className="w-5 h-5" />
-                  <span>Download starting in {formatTime(countdown)}...</span>
+                  <span>Download starting in {formatTime(countdown)} seconds...</span>
                 </div>
               ) : (
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
