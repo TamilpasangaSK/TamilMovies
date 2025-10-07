@@ -33,7 +33,7 @@ export const movies = [
   creedIII,
   theSuperMarioBrosMovie,
   transformersRiseOfTheBeasts,
-  master
+  master,
 ];
 
 export * from './dune-part-two';
