@@ -2,18 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const BannerAd = ({ className = "" }) => {
-  const adRef = useRef(null);
   const { user } = useAuth();
+  const adRef = useRef(null);
+
+  // Don't show ads for admin users
+  if (user && user.isAdmin) {
+    return null;
+  }
 
   useEffect(() => {
     // Clear any existing content
     if (adRef.current) {
       adRef.current.innerHTML = '';
-    }
-
-    // Don't load ads for admin users
-    if (user && user.isAdmin) {
-      return;
     }
 
     // Load banner ad script
@@ -46,12 +46,7 @@ const BannerAd = ({ className = "" }) => {
         adRef.current.innerHTML = '';
       }
     };
-  }, [user]);
-
-  // Don't show ads for admin users
-  if (user && user.isAdmin) {
-    return null;
-  }
+  }, []);
 
   return (
     <div className={`banner-ad ${className}`}>

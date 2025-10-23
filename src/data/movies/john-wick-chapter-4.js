@@ -14,10 +14,10 @@ export const johnWickChapter4 = {
   views: 3847291,
   uploadDate: '2024-03-20',
   quality: [
-    { format: '480p', size: '1.6 GB', type: 'standard', link: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4' },
-    { format: '720p', size: '3.4 GB', type: 'standard', link: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-720p.mp4' },
-    { format: '1080p', size: '5.8 GB', type: 'standard', link: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-1080p.mp4' },
-    { format: '1080p HDR', size: '8.1 GB', type: 'hdr', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-    { format: '4K DV', size: '16.8 GB', type: '4k-dv', link: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' }
+    { format: '480p', size: '1.6 GB', type: 'standard' },
+    { format: '720p', size: '3.4 GB', type: 'standard' },
+    { format: '1080p', size: '5.8 GB', type: 'standard' },
+    { format: '1080p HDR', size: '8.1 GB', type: 'hdr' },
+    { format: '4K DV', size: '16.8 GB', type: '4k-dv' }
   ]
 };

@@ -14,10 +14,10 @@ export const antManAndTheWaspQuantumania = {
   views: 2345678,
   uploadDate: '2024-03-16',
   quality: [
-    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://file-https://u.pcloud.link/publink/show?code=XZYD015Z8QVuNKU9wiu78Hx8FtCBeXdFBwz7' },
-    { format: '720p', size: '2.8 GB', type: 'standard', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_1280_10MG.mp4' },
-    { format: '1080p', size: '4.6 GB', type: 'standard', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_640_3MG.mp4' },
-    { format: '1080p HDR', size: '7.2 GB', type: 'hdr', link: 'https://file-examples.com/storage/fe68c009fa66f0c7b0c1a51/2017/10/file_example_MP4_480_1_5MG.mp4' },
-    { format: '4K DV', size: '15.1 GB', type: '4k-dv', link: 'https://sample-videos.com/zip/10/mp4/480/SampleVideo_1280x720_1mb.mp4' }
+    { format: '480p', size: '1.2 GB', type: 'standard' },
+    { format: '720p', size: '2.8 GB', type: 'standard' },
+    { format: '1080p', size: '4.6 GB', type: 'standard' },
+    { format: '1080p HDR', size: '7.2 GB', type: 'hdr' },
+    { format: '4K DV', size: '15.1 GB', type: '4k-dv' }
   ]
 };

@@ -14,10 +14,10 @@ export const topGunMaverick = {
   views: 2987654,
   uploadDate: '2024-03-10',
   quality: [
-    { format: '480p', size: '1.1 GB', type: 'standard', link: 'https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm' },
-    { format: '720p', size: '2.4 GB', type: 'standard', link: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4' },
-    { format: '1080p', size: '4.1 GB', type: 'standard', link: 'https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4' },
-    { format: '4K DV', size: '11.2 GB', type: '4k-dv', link: 'https://archive.org/download/Sintel/sintel-2048-surround_512kb.mp4' },
-    { format: '4K IMAX', size: '19.8 GB', type: 'imax', link: 'https://archive.org/download/TearsOfSteel/tears_of_steel_1080p.mov' }
+    { format: '480p', size: '1.1 GB', type: 'standard' },
+    { format: '720p', size: '2.4 GB', type: 'standard' },
+    { format: '1080p', size: '4.1 GB', type: 'standard' },
+    { format: '4K DV', size: '11.2 GB', type: '4k-dv' },
+    { format: '4K IMAX', size: '19.8 GB', type: 'imax' }
   ]
 };
