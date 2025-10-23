@@ -14,6 +14,7 @@ import { antManAndTheWaspQuantumania } from './ant-man-and-the-wasp-quantumania'
 import { creedIII } from './creed-iii';
 import { theSuperMarioBrosMovie } from './the-super-mario-bros-movie';
 import { transformersRiseOfTheBeasts } from './transformers-rise-of-the-beasts';
+import { master } from './master';
 
 export const movies = [
   dunePartTwo,
@@ -31,7 +32,8 @@ export const movies = [
   antManAndTheWaspQuantumania,
   creedIII,
   theSuperMarioBrosMovie,
-  transformersRiseOfTheBeasts
+  transformersRiseOfTheBeasts,
+  master
 ];
 
 export * from './dune-part-two';
@@ -50,6 +52,7 @@ export * from './ant-man-and-the-wasp-quantumania';
 export * from './creed-iii';
 export * from './the-super-mario-bros-movie';
 export * from './transformers-rise-of-the-beasts';
+export * from './master';
 
 // Extract unique genres from all movies
 export const genres = Array.from(
