@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { X, Download, FileText, HardDrive, Clock, CheckCircle, ExternalLink } from 'lucide-react';
+import { X, Download, FileText, HardDrive, Clock, CheckCircle } from 'lucide-react';
 
 const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [countdown, setCountdown] = useState(5); // 5 seconds
+  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     if (isOpen) {
@@ -17,29 +17,11 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      // Force redirect to download link
-      if (downloadInfo?.link) {
-        // Try multiple redirect methods
-        try {
-          window.open(downloadInfo.link, '_blank');
-          window.location.href = downloadInfo.link;
-        } catch (error) {
-          // Fallback method
-          const link = document.createElement('a');
-          link.href = downloadInfo.link;
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-        setTimeout(() => {
-          onClose();
-        }, 1000);
-      }
+      // Simulate download start
+      window.open(downloadInfo?.link, '_blank');
     }
     return () => clearTimeout(timer);
-  }, [downloadStarted, countdown, downloadInfo, onClose]);
+  }, [downloadStarted, countdown, downloadInfo]);
 
   if (!isOpen || !downloadInfo) return null;
 
@@ -50,15 +32,7 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
   };
 
   const handleDownloadClick = () => {
-    if (downloadInfo?.link) {
-      setDownloadStarted(true);
-    } else {
-      alert('Download link not available');
-    }
-  };
-
-  const formatTime = (seconds) => {
-    return `${seconds}`;
+    setDownloadStarted(true);
   };
 
   return (
@@ -104,10 +78,6 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
                     <FileText className="w-4 h-4" />
                     <span>Size: {downloadInfo.quality.size}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-gray-300">
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Type: {downloadInfo.quality.type}</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -124,21 +94,21 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </p>
           </div>
 
-          {/* Download Buttons */}
+          {/* Download Button or Countdown */}
           {!downloadStarted ? (
             <button
               onClick={handleDownloadClick}
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
             >
               <Download className="w-5 h-5" />
-              <span>Start Download (5 sec countdown)</span>
+              <span>Start Download</span>
             </button>
           ) : (
             <div className="text-center">
               {countdown > 0 ? (
                 <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
                   <Clock className="w-5 h-5" />
-                  <span>Download starting in {formatTime(countdown)} seconds...</span>
+                  <span>Download starting in {countdown}s...</span>
                 </div>
               ) : (
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2">
@@ -150,28 +120,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
           )}
 
           {/* Demo Notice */}
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mt-6">
-            <p className="text-blue-300 text-sm text-center">
-              <strong>Download Notice:</strong> Please wait for the countdown to complete before your download begins.
+          <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
+            <p className="text-orange-300 text-sm text-center">
+              <strong>Telegram</strong> @TMB_Rips
             </p>
-            <p className="text-blue-300 text-xs text-center mt-2">
-              For support or issues, contact: <strong>@TMB_Rips</strong> on Telegram
-            </p>
-          </div>
-
-          {/* Telegram Button */}
-          <div className="mt-4">
-            <a
-              href="https://t.me/TMB_Rips"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-500/25"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-              </svg>
-              <span>Join Telegram Channel</span>
-            </a>
           </div>
         </div>
       </div>

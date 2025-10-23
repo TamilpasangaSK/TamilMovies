@@ -14,9 +14,9 @@ export const fastX = {
   views: 2756483,
   uploadDate: '2024-03-19',
   quality: [
-    { format: '480p', size: '1.4 GB', type: 'standard', link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip' },
-    { format: '720p', size: '3.1 GB', type: 'standard', link: 'https://download.samplelib.com/mp4/sample-5s.mp4' },
-    { format: '1080p', size: '5.2 GB', type: 'standard', link: 'https://download.samplelib.com/mp4/sample-10s.mp4' },
-    { format: '4K DV', size: '14.7 GB', type: '4k-dv', link: 'https://download.samplelib.com/mp4/sample-15s.mp4' }
+    { format: '480p', size: '1.4 GB', type: 'standard' },
+    { format: '720p', size: '3.1 GB', type: 'standard' },
+    { format: '1080p', size: '5.2 GB', type: 'standard' },
+    { format: '4K DV', size: '14.7 GB', type: '4k-dv' }
   ]
 };

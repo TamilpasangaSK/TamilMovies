@@ -14,9 +14,9 @@ export const creedIII = {
   views: 1789234,
   uploadDate: '2024-03-07',
   quality: [
-    { format: '480p', size: '1.0 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/720/SampleVideo_1280x720_2mb.mp4' },
-    { format: '720p', size: '2.3 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/720/SampleVideo_1280x720_5mb.mp4' },
-    { format: '1080p', size: '4.0 GB', type: 'standard', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_1mb.mp4' },
-    { format: '4K Blu-ray', size: '11.8 GB', type: 'blu-ray', link: 'https://sample-videos.com/zip/10/mp4/1080/SampleVideo_1920x1080_2mb.mp4' }
+    { format: '480p', size: '1.0 GB', type: 'standard' },
+    { format: '720p', size: '2.3 GB', type: 'standard' },
+    { format: '1080p', size: '4.0 GB', type: 'standard' },
+    { format: '4K Blu-ray', size: '11.8 GB', type: 'blu-ray' }
   ]
 };

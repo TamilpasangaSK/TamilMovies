@@ -78,22 +78,28 @@ const MovieDetail = () => {
 
   const generateDownloadLink = (quality, movie) => {
     // Generate unique sample download links for each quality
-    // Return the actual link from the movie data if available
-    if (quality.link) {
-      return quality.link;
-    }
-    
-    // Fallback to sample links if no link provided
-    const sampleLinks = [
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
+    const servers = [
+      'https://dl1.tamilmovieshub.com/movies/',
+      'https://dl2.tamilmovieshub.com/movies/',
+      'https://dl3.tamilmovieshub.com/movies/',
+      'https://mirror1.tmhub.net/downloads/',
+      'https://mirror2.tmhub.net/downloads/',
+      'https://server1.moviehub.in/files/',
+      'https://server2.moviehub.in/files/',
+      'https://cdn1.tamilhub.org/movies/',
+      'https://cdn2.tamilhub.org/movies/',
+      'https://storage.moviedownloads.net/films/'
     ];
     
-    const linkIndex = (movie.id.charCodeAt(0) + quality.format.length) % sampleLinks.length;
-    return sampleLinks[linkIndex];
+    // Use quality format to determine server (consistent per quality)
+    const serverIndex = quality.format.length % servers.length;
+    const baseUrl = servers[serverIndex];
+    
+    const cleanTitle = movie.title.replace(/[^a-zA-Z0-9]/g, '.');
+    const qualityType = quality.type !== 'standard' ? `.${quality.type.toUpperCase().replace('-', '.')}` : '';
+    const fileName = `${cleanTitle}.${movie.year}.${quality.format}${qualityType}.x265-TMB.mkv`;
+    
+    return `${baseUrl}${encodeURIComponent(fileName)}`;
   };
 
   const generateFileDescription = (quality, movie) => {
@@ -106,7 +112,7 @@ const MovieDetail = () => {
   };
 
   const handleDownload = (quality, movie) => {
-    const downloadLink = quality.link;
+    const downloadLink = quality.link || generateDownloadLink(quality, movie);
     const fileDescription = quality.description || generateFileDescription(quality, movie);
     
     setDownloadInfo({
