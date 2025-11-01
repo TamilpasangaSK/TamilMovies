@@ -49,7 +49,7 @@ const BannerAd = ({ className = "" }) => {
   }, [user]);
 
   // Don't show ads for admin users
-  if (user) {
+  if (user && user.isAdmin) {
     return null;
   }
 

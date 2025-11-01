@@ -14,13 +14,10 @@ const AdBlockDetector = () => {
         return;
       }
 
-      // Multiple detection methods for better accuracy
-      let adBlockDetected = false;
-      
-      // Method 1: Test element detection
+      // Create a test element that would be blocked by ad blockers
       const testAd = document.createElement('div');
       testAd.innerHTML = '&nbsp;';
-      testAd.className = 'adsbox adsbygoogle ads ad-banner';
+      testAd.className = 'adsbox';
       testAd.style.position = 'absolute';
       testAd.style.left = '-10000px';
       testAd.style.width = '1px';
@@ -29,41 +26,26 @@ const AdBlockDetector = () => {
       document.body.appendChild(testAd);
       
       setTimeout(() => {
-        const isBlocked = testAd.offsetHeight === 0 || testAd.offsetWidth === 0;
-        if (isBlocked) adBlockDetected = true;
-        
+        const isBlocked = testAd.offsetHeight === 0;
+        setIsAdBlockDetected(isBlocked);
+        if (isBlocked) {
+          setShowWarning(true);
+        }
         document.body.removeChild(testAd);
-        
-        // Method 2: Check for common ad blocker variables
-        if (typeof window.adnxs === 'undefined' || 
-            typeof window.googletag === 'undefined' ||
-            typeof window.pbjs === 'undefined') {
-          adBlockDetected = true;
-        }
-        
-        // Method 3: Check for blocked requests
-        const img = new Image();
-        img.onload = () => {
-          // Ad loaded successfully
-        };
-        img.onerror = () => {
-          adBlockDetected = true;
-          setIsAdBlockDetected(true);
-          setShowWarning(true);
-        };
-        img.src = 'https://pagead2.googlesyndication.com/pagead/show_ads.js';
-        
-        // Set final result
-        if (adBlockDetected) {
-          setIsAdBlockDetected(true);
-          setShowWarning(true);
-        }
-      }, 200);
+      }, 100);
     };
 
+    // Test for common ad block indicators
+    const checkAdBlockers = () => {
+      // Check if common ad blocker variables exist
+      if (typeof window.adnxs === 'undefined' || 
+          typeof window.googletag === 'undefined') {
+        detectAdBlock();
+      }
+    };
 
-    // Run detection after page loads
-    setTimeout(detectAdBlock, 1500);
+    // Run detection after a short delay
+    setTimeout(checkAdBlockers, 2000);
   }, [user]);
 
   // Don't show ads or adblock detection for admin users

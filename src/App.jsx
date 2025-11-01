@@ -61,19 +61,19 @@ function App() {
                       </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/trending" className="text-gray-300 hover:text-white transition-colors text-sm">
                         About Us
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/latest" className="text-gray-300 hover:text-white transition-colors text-sm">
                         DMCA
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/login" className="text-gray-300 hover:text-white transition-colors text-sm">
                         Request A Movie
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -83,24 +83,24 @@ function App() {
                   <h3 className="text-white font-bold text-lg mb-4">Categories</h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                         4K Movies
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                         1080p Movies
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                         Anime
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                      <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                         Web Series
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

@@ -300,7 +300,7 @@ const MovieDetail = () => {
       </div>
 
       {/* Download Section */}
-      <div className="bg-slate-900 dark:bg-gray-100 py-16">
+      <div className="bg-slate-900 dark:bg-slate-900 py-16">
         <div className="container mx-auto px-4">
           {/* Banner Ad - Before Download Section */}
           <div className="flex justify-center mb-12">
@@ -308,28 +308,28 @@ const MovieDetail = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-gray-900 mb-4">Download Options</h2>
-            <p className="text-gray-400 dark:text-gray-600 text-lg">Choose your preferred quality and start downloading</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-white mb-4">Download Options</h2>
+            <p className="text-gray-400 dark:text-gray-400 text-lg">Choose your preferred quality and start downloading</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {movie.quality.map((quality) => (
-              <div key={quality.format} className="bg-white/5 dark:bg-white backdrop-blur-sm rounded-xl p-6 border border-white/10 dark:border-gray-200 hover:border-purple-400/50 dark:hover:border-purple-400/50 transition-all group shadow-lg dark:shadow-gray-200">
+              <div key={quality.format} className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 dark:border-white/10 hover:border-purple-400/50 dark:hover:border-purple-400/50 transition-all group">
                 <div className="text-center">
                   <div className={`bg-gradient-to-r ${getQualityColor(quality.type)} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                     {getQualityIcon(quality.type)}
                   </div>
                   
-                  <h3 className="text-white dark:text-gray-900 font-bold text-xl mb-2">{quality.format}</h3>
+                  <h3 className="text-white dark:text-white font-bold text-xl mb-2">{quality.format}</h3>
                   <div className="mb-2">
                     {quality.type !== 'standard' && (
-                      <span className="bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-300 dark:text-orange-600 px-2 py-1 rounded-full text-xs font-medium border border-orange-400/30 dark:border-orange-400/30 mb-2 inline-block">
+                      <span className="bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-300 dark:text-orange-300 px-2 py-1 rounded-full text-xs font-medium border border-orange-400/30 dark:border-orange-400/30 mb-2 inline-block">
                         {quality.type.toUpperCase().replace('-', ' ')}
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-400 dark:text-gray-600 text-sm mb-1">File Size</p>
-                  <p className="text-purple-400 dark:text-purple-600 font-semibold text-lg mb-4">{quality.size}</p>
+                  <p className="text-gray-400 dark:text-gray-400 text-sm mb-1">File Size</p>
+                  <p className="text-purple-400 dark:text-purple-400 font-semibold text-lg mb-4">{quality.size}</p>
                   
                   <button 
                     onClick={() => handleDownload(quality, movie)}
@@ -348,29 +348,29 @@ const MovieDetail = () => {
             <BannerAd />
           </div>
           {/* Download Instructions */}
-          <div className="bg-white/5 dark:bg-white backdrop-blur-sm rounded-xl p-8 border border-white/10 dark:border-gray-200 mt-12 shadow-lg dark:shadow-gray-200">
-            <h3 className="text-white dark:text-gray-900 font-bold text-xl mb-6 text-center">Download Instructions</h3>
+          <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 dark:border-white/10 mt-12">
+            <h3 className="text-white dark:text-white font-bold text-xl mb-6 text-center">Download Instructions</h3>
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <h4 className="text-white dark:text-gray-900 font-semibold mb-2">Choose Quality</h4>
-                <p className="text-gray-400 dark:text-gray-600 text-sm">Select your preferred video quality based on your device and storage.</p>
+                <h4 className="text-white dark:text-white font-semibold mb-2">Choose Quality</h4>
+                <p className="text-gray-400 dark:text-gray-400 text-sm">Select your preferred video quality based on your device and storage.</p>
               </div>
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">2</span>
                 </div>
-                <h4 className="text-white dark:text-gray-900 font-semibold mb-2">Click Download</h4>
-                <p className="text-gray-400 dark:text-gray-600 text-sm">Click the download button and wait for the download to start.</p>
+                <h4 className="text-white dark:text-white font-semibold mb-2">Click Download</h4>
+                <p className="text-gray-400 dark:text-gray-400 text-sm">Click the download button and wait for the download to start.</p>
               </div>
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">3</span>
                 </div>
-                <h4 className="text-white dark:text-gray-900 font-semibold mb-2">Enjoy Movie</h4>
-                <p className="text-gray-400 dark:text-gray-600 text-sm">Once downloaded, enjoy watching the movie offline anytime.</p>
+                <h4 className="text-white dark:text-white font-semibold mb-2">Enjoy Movie</h4>
+                <p className="text-gray-400 dark:text-gray-400 text-sm">Once downloaded, enjoy watching the movie offline anytime.</p>
               </div>
             </div>
           </div>
