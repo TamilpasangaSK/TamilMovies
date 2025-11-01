@@ -5,23 +5,23 @@ const PopUnderAd = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // Load pop-under ad script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = '//installerastonishment.com/3f/bc/54/3fbc5467bc86b7c4085f7c8b7cea18ed.js';
-    script.async = true;
-    
-    // Don't load ads for admin users
-    if (!(user && user.isAdmin)) {
+    // Don't load ads for logged in users (both regular users and admin)
+    if (!user) {
+      // Load pop-under ad script only for non-logged in users
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//featuregangster.com/6e/ec/f6/6eecf6611098691af50882310d84ca09.js';
+      script.async = true;
+      
       document.head.appendChild(script);
-    }
 
-    return () => {
-      // Cleanup script on unmount
-      if (document.head.contains(script) && !(user && user.isAdmin)) {
-        document.head.removeChild(script);
-      }
-    };
+      return () => {
+        // Cleanup script on unmount
+        if (document.head.contains(script)) {
+          document.head.removeChild(script);
+        }
+      };
+    }
   }, [user]);
 
   // Don't show ads for admin users

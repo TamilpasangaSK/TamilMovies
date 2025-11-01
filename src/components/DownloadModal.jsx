@@ -17,8 +17,35 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      // Simulate download start
-      window.open(downloadInfo?.link, '_blank');
+      // Enhanced download redirect with multiple methods
+      const downloadLink = downloadInfo?.link;
+      if (downloadLink) {
+        try {
+          // Method 1: Open in new tab
+          const newWindow = window.open(downloadLink, '_blank');
+          
+          // Method 2: If popup blocked, redirect current page
+          if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+            window.location.href = downloadLink;
+          }
+          
+          // Method 3: Fallback with anchor element
+          setTimeout(() => {
+            const anchor = document.createElement('a');
+            anchor.href = downloadLink;
+            anchor.target = '_blank';
+            anchor.rel = 'noopener noreferrer';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+          }, 500);
+          
+        } catch (error) {
+          console.error('Download redirect failed:', error);
+          // Final fallback
+          window.location.href = downloadLink;
+        }
+      }
     }
     return () => clearTimeout(timer);
   }, [downloadStarted, countdown, downloadInfo]);
