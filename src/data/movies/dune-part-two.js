@@ -15,7 +15,7 @@ export const dunePartTwo = {
   views: 2847392,
   uploadDate: '2024-03-15',
   quality: [
-    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://dl1.tamilmovieshub.com/movies/Dune.Part.Two.2024.480p.x265-TMB.mkv' },
+    { format: '480p', size: '1.2 GB', type: 'standard', link: 'https://gdlink.dev/file/dmXOBcS0vujFHYy' },
     { format: '720p', size: '2.8 GB', type: 'standard', link: 'https://dl2.tamilmovieshub.com/movies/Dune.Part.Two.2024.720p.x265-TMB.mkv' },
     { format: '1080p', size: '4.5 GB', type: 'standard', link: 'https://dl3.tamilmovieshub.com/movies/Dune.Part.Two.2024.1080p.x265-TMB.mkv' },
     { format: '1080p HDR', size: '6.2 GB', type: 'hdr', link: 'https://mirror1.tmhub.net/downloads/Dune.Part.Two.2024.1080p.HDR.x265-TMB.mkv' },
