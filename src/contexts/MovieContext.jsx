@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { movies as initialMovies } from '../data/movies';
+import { MovieContext } from '../contexts/MovieContext';
+
 
 const MovieContext = createContext(undefined);
 
