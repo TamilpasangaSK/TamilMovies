@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 import { movies as initialMovies } from '../data/movies';
-import { MovieContext } from '../contexts/MovieContext';
 
-
+// Create the context
 const MovieContext = createContext(undefined);
 
+// Custom hook to use the context
 export const useMovies = () => {
   const context = useContext(MovieContext);
   if (!context) {
@@ -13,26 +13,24 @@ export const useMovies = () => {
   return context;
 };
 
+// Provider component
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState(initialMovies);
 
   const addMovie = (movieData) => {
-    // Generate unique ID
     const newId = (Math.max(...movies.map(m => parseInt(m.id))) + 1).toString();
-    
     const newMovie = {
       ...movieData,
       id: newId,
       views: movieData.views || 0,
       uploadDate: movieData.uploadDate || new Date().toISOString().split('T')[0]
     };
-
     setMovies(prev => [newMovie, ...prev]);
     return newMovie;
   };
 
   const updateMovie = (id, movieData) => {
-    setMovies(prev => prev.map(movie => 
+    setMovies(prev => prev.map(movie =>
       movie.id === id ? { ...movie, ...movieData } : movie
     ));
   };
@@ -42,7 +40,7 @@ export const MovieProvider = ({ children }) => {
   };
 
   const incrementViews = (id) => {
-    setMovies(prev => prev.map(movie => 
+    setMovies(prev => prev.map(movie =>
       movie.id === id ? { ...movie, views: movie.views + 1 } : movie
     ));
   };
@@ -50,11 +48,12 @@ export const MovieProvider = ({ children }) => {
   const getMovieById = (id) => {
     return movies.find(movie => movie.id === id);
   };
+
   return (
-    <MovieContext.Provider value={{ 
-      movies, 
-      addMovie, 
-      updateMovie, 
+    <MovieContext.Provider value={{
+      movies,
+      addMovie,
+      updateMovie,
       deleteMovie,
       incrementViews,
       getMovieById
@@ -63,3 +62,6 @@ export const MovieProvider = ({ children }) => {
     </MovieContext.Provider>
   );
 };
+
+// ✅ Export the context itself for direct access if needed
+export { MovieContext };
