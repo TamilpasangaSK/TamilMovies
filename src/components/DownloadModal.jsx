@@ -17,21 +17,8 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
     if (downloadStarted && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (downloadStarted && countdown === 0) {
-      try {
-        const link = downloadInfo?.link;
-        const anchor = document.createElement('a');
-        anchor.href = link;
-        anchor.target = '_blank';
-        anchor.rel = 'noopener noreferrer';
-        anchor.click();
-
-        // Fallback redirect
-        setTimeout(() => {
-          window.location.href = link;
-        }, 500);
-      } catch (err) {
-        console.error('Download failed:', err);
-      }
+      // Simulate download start
+      window.open(downloadInfo?.link, '_blank');
     }
     return () => clearTimeout(timer);
   }, [downloadStarted, countdown, downloadInfo]);
@@ -85,11 +72,11 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center space-x-2 text-amber-700 dark:text-gray-300">
                     <HardDrive className="w-4 h-4" />
-                    <span>Format: {downloadInfo.quality?.format || 'N/A'}</span>
+                    <span>Quality: {downloadInfo.quality.format}</span>
                   </div>
                   <div className="flex items-center space-x-2 text-amber-700 dark:text-gray-300">
                     <FileText className="w-4 h-4" />
-                    <span>Size: {downloadInfo.quality?.size || 'N/A'}</span>
+                    <span>Size: {downloadInfo.quality.size}</span>
                   </div>
                 </div>
               </div>
@@ -103,7 +90,7 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
               <span>File Description</span>
             </h4>
             <p className="text-amber-800 dark:text-gray-300 text-sm font-mono bg-amber-100 dark:bg-black/30 p-3 rounded-lg break-all border border-amber-200 dark:border-white/10">
-              {downloadInfo.description || 'No description available.'}
+              {downloadInfo.description}
             </p>
           </div>
 
@@ -132,19 +119,11 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </div>
           )}
 
-          {/* Telegram Notice */}
-          <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6 text-center">
-            <p className="text-orange-600 dark:text-orange-300 text-sm">
-              Join our <strong>Telegram</strong> for updates and exclusive releases.
+          {/* Demo Notice */}
+          <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
+            <p className="text-orange-600 dark:text-orange-300 text-sm text-center">
+              <strong>Telegram</strong> @TMB_Rips
             </p>
-            <a
-              href="https://t.me/TMB_Rips"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-2 px-4 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-blue-500/25"
-            >
-              Join Telegram
-            </a>
           </div>
         </div>
       </div>
