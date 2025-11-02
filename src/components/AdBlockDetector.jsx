@@ -8,7 +8,7 @@ const AdBlockDetector = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    let detectionTimer;
+    let detectionTimer, imageTest, scriptTest;
     
     const detectAdBlock = async () => {
       // Don't run ad detection for admin users
@@ -18,76 +18,140 @@ const AdBlockDetector = () => {
 
       let adBlockDetected = false;
 
-      // Method 1: Test element blocking
+      // Method 1: Test ad element blocking (most reliable)
       try {
         const testAd = document.createElement('div');
         testAd.innerHTML = '&nbsp;';
-        testAd.className = 'adsbox ad-banner advertisement ads';
+        testAd.className = 'adsbox ad-banner advertisement ads ad-placement';
         testAd.style.position = 'absolute';
         testAd.style.left = '-10000px';
         testAd.style.width = '1px';
         testAd.style.height = '1px';
+        testAd.id = 'ad-test-element';
         
         document.body.appendChild(testAd);
         
         setTimeout(() => {
-          if (testAd.offsetHeight === 0 || testAd.style.display === 'none' || testAd.style.visibility === 'hidden') {
+          if (testAd.offsetHeight === 0 || 
+              testAd.offsetWidth === 0 || 
+              testAd.style.display === 'none' || 
+              testAd.style.visibility === 'hidden' ||
+              window.getComputedStyle(testAd).display === 'none') {
             adBlockDetected = true;
+            setIsAdBlockDetected(true);
+            setShowWarning(true);
           }
           if (document.body.contains(testAd)) {
             document.body.removeChild(testAd);
           }
-          
-          if (adBlockDetected) {
-            setIsAdBlockDetected(true);
-            setShowWarning(true);
-          }
-        }, 100);
+        }, 200);
       } catch (e) {
-        // If error occurs, assume ad block is present
         adBlockDetected = true;
+        setIsAdBlockDetected(true);
+        setShowWarning(true);
       }
 
-      // Method 2: Check for blocked scripts
+      // Method 2: Test Google Ads script loading
       try {
-        const script = document.createElement('script');
-        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-        script.onerror = () => {
+        scriptTest = document.createElement('script');
+        scriptTest.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+        scriptTest.async = true;
+        scriptTest.onerror = () => {
           adBlockDetected = true;
           setIsAdBlockDetected(true);
           setShowWarning(true);
         };
-        document.head.appendChild(script);
+        scriptTest.onload = () => {
+          // Script loaded successfully, check if adsbygoogle exists
+          setTimeout(() => {
+            if (typeof window.adsbygoogle === 'undefined') {
+              adBlockDetected = true;
+              setIsAdBlockDetected(true);
+              setShowWarning(true);
+            }
+          }, 500);
+        };
+        document.head.appendChild(scriptTest);
         
         setTimeout(() => {
-          if (document.head.contains(script)) {
-            document.head.removeChild(script);
+          if (document.head.contains(scriptTest)) {
+            document.head.removeChild(scriptTest);
           }
-        }, 2000);
+        }, 3000);
       } catch (e) {
         adBlockDetected = true;
+        setIsAdBlockDetected(true);
+        setShowWarning(true);
       }
 
-      // Method 3: Check common ad blocker variables
+      // Method 3: Test image ad loading
+      try {
+        imageTest = new Image();
+        imageTest.onload = () => {
+          // Image loaded successfully
+        };
+        imageTest.onerror = () => {
+          adBlockDetected = true;
+          setIsAdBlockDetected(true);
+          setShowWarning(true);
+        };
+        imageTest.src = 'https://googleads.g.doubleclick.net/pagead/id';
+      } catch (e) {
+        adBlockDetected = true;
+        setIsAdBlockDetected(true);
+        setShowWarning(true);
+      }
+
+      // Method 4: Check common ad blocker variables and functions
       setTimeout(() => {
         if (typeof window.adnxs === 'undefined' && 
             typeof window.googletag === 'undefined' && 
-            typeof window.__gads === 'undefined') {
+            typeof window.__gads === 'undefined' &&
+            typeof window.pbjs === 'undefined') {
           adBlockDetected = true;
           setIsAdBlockDetected(true);
           setShowWarning(true);
         }
-      }, 1500);
+      }, 1000);
+
+      // Method 5: Check for blocked fetch requests
+      try {
+        fetch('https://www.googletagservices.com/tag/js/gpt.js', { 
+          method: 'HEAD',
+          mode: 'no-cors'
+        }).catch(() => {
+          adBlockDetected = true;
+          setIsAdBlockDetected(true);
+          setShowWarning(true);
+        });
+      } catch (e) {
+        adBlockDetected = true;
+        setIsAdBlockDetected(true);
+        setShowWarning(true);
+      }
     };
 
-    // Run detection after page load
-    detectionTimer = setTimeout(() => {
+    // Run detection after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        detectionTimer = setTimeout(detectAdBlock, 1000);
+      });
+    } else {
+      detectionTimer = setTimeout(detectAdBlock, 1000);
+    }
+
+    // Also run detection after window load
+    window.addEventListener('load', () => {
       detectAdBlock();
-    }, 2000);
+    });
 
     return () => {
       if (detectionTimer) {
         clearTimeout(detectionTimer);
+      }
+      // Cleanup test elements
+      if (scriptTest && document.head.contains(scriptTest)) {
+        document.head.removeChild(scriptTest);
       }
     };
   }, [user]);

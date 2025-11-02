@@ -40,8 +40,7 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
       onClick={handleBackdropClick}
     >
-      <div className="relative w-full max-w-2xl mx-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden shadow-2xl">
-        <div className="relative w-full max-w-2xl mx-4 bg-white dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 overflow-hidden shadow-2xl">
+      <div className="relative w-full max-w-2xl mx-4 bg-gradient-to-br from-white via-amber-50 to-orange-50 dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-amber-200 dark:border-white/20 overflow-hidden shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -56,12 +55,12 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <Download className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Download Ready</h2>
-            <p className="text-gray-600 dark:text-gray-400">Your movie download is prepared</p>
+            <h2 className="text-2xl font-bold text-amber-900 dark:text-white mb-2">Download Ready</h2>
+            <p className="text-amber-700 dark:text-gray-400">Your movie download is prepared</p>
           </div>
 
           {/* Movie Info */}
-          <div className="bg-gray-50 dark:bg-white/5 rounded-xl p-6 mb-6">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:bg-white/5 rounded-xl p-6 mb-6 border border-amber-100 dark:border-white/10">
             <div className="flex items-start space-x-4">
               <img
                 src={downloadInfo.movie.posterUrl}
@@ -69,13 +68,13 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
                 className="w-20 h-28 object-cover rounded-lg"
               />
               <div className="flex-1">
-                <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-2">{downloadInfo.movie.title}</h3>
+                <h3 className="text-amber-900 dark:text-white font-semibold text-lg mb-2">{downloadInfo.movie.title}</h3>
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                  <div className="flex items-center space-x-2 text-amber-700 dark:text-gray-300">
                     <HardDrive className="w-4 h-4" />
                     <span>Quality: {downloadInfo.quality.format}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                  <div className="flex items-center space-x-2 text-amber-700 dark:text-gray-300">
                     <FileText className="w-4 h-4" />
                     <span>Size: {downloadInfo.quality.size}</span>
                   </div>
@@ -85,12 +84,12 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
           </div>
 
           {/* File Description */}
-          <div className="bg-gray-50 dark:bg-white/5 rounded-xl p-4 mb-6">
-            <h4 className="text-gray-900 dark:text-white font-medium mb-2 flex items-center space-x-2">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:bg-white/5 rounded-xl p-4 mb-6 border border-amber-100 dark:border-white/10">
+            <h4 className="text-amber-900 dark:text-white font-medium mb-2 flex items-center space-x-2">
               <FileText className="w-4 h-4" />
               <span>File Description</span>
             </h4>
-            <p className="text-gray-700 dark:text-gray-300 text-sm font-mono bg-gray-100 dark:bg-black/30 p-3 rounded-lg break-all">
+            <p className="text-amber-800 dark:text-gray-300 text-sm font-mono bg-amber-100 dark:bg-black/30 p-3 rounded-lg break-all border border-amber-200 dark:border-white/10">
               {downloadInfo.description}
             </p>
           </div>
@@ -122,11 +121,10 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
 
           {/* Demo Notice */}
           <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mt-6">
-            <p className="text-orange-300 text-sm text-center">
+            <p className="text-orange-600 dark:text-orange-300 text-sm text-center">
               <strong>Telegram</strong> @TMB_Rips
             </p>
           </div>
-        </div>
         </div>
       </div>
     </div>

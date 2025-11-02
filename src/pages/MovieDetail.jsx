@@ -77,27 +77,80 @@ const MovieDetail = () => {
   };
 
   const generateDownloadLink = (quality, movie) => {
-    // Generate unique sample download links for each quality
-    const servers = [
-      'https://dl1.tamilmovieshub.com/movies/',
-      'https://dl2.tamilmovieshub.com/movies/',
-      'https://dl3.tamilmovieshub.com/movies/',
-      'https://mirror1.tmhub.net/downloads/',
-      'https://mirror2.tmhub.net/downloads/',
-      'https://server1.moviehub.in/files/',
-      'https://server2.moviehub.in/files/',
-      'https://cdn1.tamilhub.org/movies/',
-      'https://cdn2.tamilhub.org/movies/',
-      'https://storage.moviedownloads.net/films/'
+    // HubCloud download links with proper tokens
+    const hubCloudLinks = [
+      'https://hubcloud.one/drive/7gyaxhggy731ae9',
+      'https://hubcloud.one/drive/lhosrisff97r7tx', 
+      'https://hubcloud.one/drive/jlcezil2ye2ghh3',
+      'https://hubcloud.one/drive/8hzbyiggz842bf0',
+      'https://hubcloud.one/drive/mipstjsgg08s8h4',
+      'https://hubcloud.one/drive/qkdvxkjhh19t9i5',
+      'https://hubcloud.one/drive/rlenwmkii20u0j6',
+      'https://hubcloud.one/drive/snfoxnljj31v1k7',
+      'https://hubcloud.one/drive/topqyomkk42w2l8',
+      'https://hubcloud.one/drive/upqrzpnll53x3m9'
     ];
     
-    // Use quality format to determine server (consistent per quality)
-    const serverIndex = quality.format.length % servers.length;
-    const baseUrl = servers[serverIndex];
+    // Use movie ID and quality format to determine consistent link
+    const linkIndex = (parseInt(movie.id) + quality.format.length) % hubCloudLinks.length;
+    return hubCloudLinks[linkIndex];
+  };
+
+  const handleDownloadWithRetry = async (quality, movie) => {
+    const primaryLink = quality.link || generateDownloadLink(quality, movie);
+    const fileDescription = quality.description || generateFileDescription(quality, movie);
     
-    const cleanTitle = movie.title.replace(/[^a-zA-Z0-9]/g, '.');
-    const qualityType = quality.type !== 'standard' ? `.${quality.type.toUpperCase().replace('-', '.')}` : '';
-    const fileName = `${cleanTitle}.${movie.year}.${quality.format}${qualityType}.x265-TMB.mkv`;
+    // Try primary link first
+    try {
+      const popup = window.open(primaryLink, '_blank');
+      
+      // Check if popup was blocked
+      if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+        throw new Error('Popup blocked');
+      }
+      
+      // Set download info for modal
+      setDownloadInfo({
+        link: primaryLink,
+        description: fileDescription,
+        quality: quality,
+        movie: movie
+      });
+      
+    } catch (error) {
+      console.log('Primary link failed, trying fallback:', error);
+      
+      // Fallback: Generate alternative link
+      const fallbackLink = generateDownloadLink(quality, movie);
+      
+      try {
+        // Try fallback link
+        window.location.href = fallbackLink;
+        
+        setDownloadInfo({
+          link: fallbackLink,
+          description: fileDescription,
+          quality: quality,
+          movie: movie
+        });
+        
+      } catch (fallbackError) {
+        console.error('All download methods failed:', fallbackError);
+        
+        // Final fallback: Show modal with link
+        setDownloadInfo({
+          link: primaryLink,
+          description: fileDescription,
+          quality: quality,
+          movie: movie
+        });
+      }
+    }
+  };
+
+  const handleDownload = (quality, movie) => {
+    handleDownloadWithRetry(quality, movie);
+  };
     
     return `${baseUrl}${encodeURIComponent(fileName)}`;
   };
@@ -300,7 +353,7 @@ const MovieDetail = () => {
       </div>
 
       {/* Download Section */}
-      <div className="bg-gray-100 dark:bg-slate-900 py-16">
+      <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:bg-slate-900 py-16">
         <div className="container mx-auto px-4">
           {/* Banner Ad - Before Download Section */}
           <div className="flex justify-center mb-12">
@@ -308,27 +361,27 @@ const MovieDetail = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Download Options</h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">Choose your preferred quality and start downloading</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-900 dark:text-white mb-4">Download Options</h2>
+            <p className="text-amber-700 dark:text-gray-400 text-lg">Choose your preferred quality and start downloading</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {movie.quality.map((quality) => (
-              <div key={quality.format} className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-gray-200 dark:border-white/10 hover:border-purple-400/50 dark:hover:border-purple-400/50 transition-all group shadow-lg dark:shadow-none">
+              <div key={quality.format} className="bg-gradient-to-br from-white via-amber-50 to-orange-50 dark:bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-amber-200 dark:border-white/10 hover:border-purple-400/50 dark:hover:border-purple-400/50 transition-all group shadow-lg hover:shadow-xl">
                 <div className="text-center">
                   <div className={`bg-gradient-to-r ${getQualityColor(quality.type)} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                     {getQualityIcon(quality.type)}
                   </div>
                   
-                  <h3 className="text-gray-900 dark:text-white font-bold text-xl mb-2">{quality.format}</h3>
+                  <h3 className="text-amber-900 dark:text-white font-bold text-xl mb-2">{quality.format}</h3>
                   <div className="mb-2">
                     {quality.type !== 'standard' && (
-                      <span className="bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-600 dark:text-orange-300 px-2 py-1 rounded-full text-xs font-medium border border-orange-400/30 dark:border-orange-400/30 mb-2 inline-block">
+                      <span className="bg-gradient-to-r from-orange-500/30 to-red-500/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full text-xs font-medium border border-orange-400/50 dark:border-orange-400/30 mb-2 inline-block">
                         {quality.type.toUpperCase().replace('-', ' ')}
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">File Size</p>
+                  <p className="text-amber-600 dark:text-gray-400 text-sm mb-1">File Size</p>
                   <p className="text-purple-600 dark:text-purple-400 font-semibold text-lg mb-4">{quality.size}</p>
                   
                   <button 
@@ -348,29 +401,29 @@ const MovieDetail = () => {
             <BannerAd />
           </div>
           {/* Download Instructions */}
-          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-gray-200 dark:border-white/10 mt-12 shadow-lg dark:shadow-none">
-            <h3 className="text-gray-900 dark:text-white font-bold text-xl mb-6 text-center">Download Instructions</h3>
+          <div className="bg-gradient-to-br from-white via-amber-50 to-orange-50 dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-amber-200 dark:border-white/10 mt-12 shadow-lg hover:shadow-xl transition-shadow">
+            <h3 className="text-amber-900 dark:text-white font-bold text-xl mb-6 text-center">Download Instructions</h3>
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <h4 className="text-gray-900 dark:text-white font-semibold mb-2">Choose Quality</h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Select your preferred video quality based on your device and storage.</p>
+                <h4 className="text-amber-900 dark:text-white font-semibold mb-2">Choose Quality</h4>
+                <p className="text-amber-700 dark:text-gray-400 text-sm">Select your preferred video quality based on your device and storage.</p>
               </div>
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">2</span>
                 </div>
-                <h4 className="text-gray-900 dark:text-white font-semibold mb-2">Click Download</h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Click the download button and wait for the download to start.</p>
+                <h4 className="text-amber-900 dark:text-white font-semibold mb-2">Click Download</h4>
+                <p className="text-amber-700 dark:text-gray-400 text-sm">Click the download button and wait for the download to start.</p>
               </div>
               <div>
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">3</span>
                 </div>
-                <h4 className="text-gray-900 dark:text-white font-semibold mb-2">Enjoy Movie</h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Once downloaded, enjoy watching the movie offline anytime.</p>
+                <h4 className="text-amber-900 dark:text-white font-semibold mb-2">Enjoy Movie</h4>
+                <p className="text-amber-700 dark:text-gray-400 text-sm">Once downloaded, enjoy watching the movie offline anytime.</p>
               </div>
             </div>
           </div>

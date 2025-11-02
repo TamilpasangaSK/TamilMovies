@@ -5,32 +5,49 @@ const PopUnderAd = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    let adScript;
+    let adScript, popUnderScript;
     
     // Load pop-under ad script
     const loadAds = () => {
-      // Don't load ads for logged in users
+      // Don't load ads for any logged in users (admin or regular)
       if (user) {
         return;
       }
 
-      adScript = document.createElement('script');
-      adScript.type = 'text/javascript';
-      adScript.src = '//featuregangster.com/6e/ec/f6/6eecf6611098691af50882310d84ca09.js';
-      adScript.async = true;
-      
-      document.head.appendChild(adScript);
+      try {
+        // Load the new popup ad script
+        popUnderScript = document.createElement('script');
+        popUnderScript.type = 'text/javascript';
+        popUnderScript.src = '//featuregangster.com/6e/ec/f6/6eecf6611098691af50882310d84ca09.js';
+        popUnderScript.async = true;
+        popUnderScript.defer = true;
+        
+        // Add error handling
+        popUnderScript.onerror = () => {
+          console.log('Popup ad script failed to load (likely blocked)');
+        };
+        
+        popUnderScript.onload = () => {
+          console.log('Popup ad script loaded successfully');
+        };
+        
+        document.head.appendChild(popUnderScript);
+      } catch (error) {
+        console.log('Error loading popup ads:', error);
+      }
     };
 
-    // Load ads initially if user is not logged in
+    // Load ads initially for non-logged users only
     if (!user) {
-      loadAds();
+      // Delay loading to ensure page is ready
+      setTimeout(loadAds, 2000);
     }
 
-    // Listen for adblock dismissed event
+    // Listen for adblock dismissed event to reload ads
     const handleAdblockDismissed = () => {
       if (!user) {
-        setTimeout(loadAds, 1000);
+        console.log('Adblock dismissed, reloading popup ads');
+        setTimeout(loadAds, 500);
       }
     };
     
@@ -38,15 +55,15 @@ const PopUnderAd = () => {
 
     return () => {
       // Cleanup script on unmount
-      if (adScript && document.head.contains(adScript)) {
-        document.head.removeChild(adScript);
+      if (popUnderScript && document.head.contains(popUnderScript)) {
+        document.head.removeChild(popUnderScript);
       }
       window.removeEventListener('adblock-dismissed', handleAdblockDismissed);
     };
   }, [user]);
 
-  // Don't show ads for admin users
-  if (user && user.isAdmin) {
+  // Don't show ads for any logged in users
+  if (user) {
     return null;
   }
 
