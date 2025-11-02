@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MovieContext } from '../contexts/MovieContext';
-import { AuthContext } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 import TrailerModal from '../components/TrailerModal';
 import DownloadModal from '../components/DownloadModal';
@@ -13,7 +13,7 @@ const MovieDetail = () => {
   const { title } = useParams();
   const navigate = useNavigate();
   const { movies } = useContext(MovieContext);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { theme } = useContext(ThemeContext);
   const [showTrailer, setShowTrailer] = useState(false);
   const [showDownload, setShowDownload] = useState(false);
