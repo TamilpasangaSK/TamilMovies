@@ -15,7 +15,7 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : false; // Default to light mode
+    return saved ? saved === 'dark' : false;
   });
 
   useEffect(() => {
@@ -35,3 +35,6 @@ export const ThemeProvider = ({ children }) => {
     </AuthProvider>
   );
 };
+
+// ✅ Add this line to fix the import error
+export { ThemeContext };
