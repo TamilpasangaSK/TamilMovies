@@ -127,6 +127,7 @@ const DownloadModal = ({ isOpen, onClose, downloadInfo }) => {
             </p>
           </div>
         </div>
+        </div>
       </div>
     </div>
   );
