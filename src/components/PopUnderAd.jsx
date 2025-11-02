@@ -5,22 +5,43 @@ const PopUnderAd = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // Load pop-under ad script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = '//installerastonishment.com/3f/bc/54/3fbc5467bc86b7c4085f7c8b7cea18ed.js';
-    script.async = true;
+    let adScript;
     
-    // Don't load ads for admin users
-    if (!(user && user.isAdmin)) {
-      document.head.appendChild(script);
+    // Load pop-under ad script
+    const loadAds = () => {
+      // Don't load ads for logged in users
+      if (user) {
+        return;
+      }
+
+      adScript = document.createElement('script');
+      adScript.type = 'text/javascript';
+      adScript.src = '//featuregangster.com/6e/ec/f6/6eecf6611098691af50882310d84ca09.js';
+      adScript.async = true;
+      
+      document.head.appendChild(adScript);
+    };
+
+    // Load ads initially if user is not logged in
+    if (!user) {
+      loadAds();
     }
+
+    // Listen for adblock dismissed event
+    const handleAdblockDismissed = () => {
+      if (!user) {
+        setTimeout(loadAds, 1000);
+      }
+    };
+    
+    window.addEventListener('adblock-dismissed', handleAdblockDismissed);
 
     return () => {
       // Cleanup script on unmount
-      if (document.head.contains(script) && !(user && user.isAdmin)) {
-        document.head.removeChild(script);
+      if (adScript && document.head.contains(adScript)) {
+        document.head.removeChild(adScript);
       }
+      window.removeEventListener('adblock-dismissed', handleAdblockDismissed);
     };
   }, [user]);
 

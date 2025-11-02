@@ -6,50 +6,70 @@ const BannerAd = ({ className = "" }) => {
   const { user } = useAuth();
 
   useEffect(() => {
+    let adContainer;
+    
     // Clear any existing content
     if (adRef.current) {
       adRef.current.innerHTML = '';
     }
 
-    // Don't load ads for admin users
-    if (user && user.isAdmin) {
+    // Don't load ads for any logged in users
+    if (user) {
       return;
     }
 
-    // Load banner ad script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = `
-      atOptions = {
-        'key': '874f9b580ee153b038f34d778d444072',
-        'format': 'iframe',
-        'height': 300,
-        'width': 160,
-        'params': {}
-      };
-    `;
+    const loadBannerAd = () => {
+      if (adRef.current && !user) {
+        // Clear existing content
+        adRef.current.innerHTML = '';
+        
+        // Load banner ad script
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.innerHTML = `
+          atOptions = {
+            'key': '874f9b580ee153b038f34d778d444072',
+            'format': 'iframe',
+            'height': 300,
+            'width': 160,
+            'params': {}
+          };
+        `;
+        
+        const invokeScript = document.createElement('script');
+        invokeScript.type = 'text/javascript';
+        invokeScript.src = '//installerastonishment.com/874f9b580ee153b038f34d778d444072/invoke.js';
+        invokeScript.async = true;
+        
+        // Add scripts to the ad container
+        adRef.current.appendChild(script);
+        adRef.current.appendChild(invokeScript);
+      }
+    };
+
+    // Load ads initially
+    loadBannerAd();
+
+    // Listen for adblock dismissed event
+    const handleAdblockDismissed = () => {
+      if (!user) {
+        setTimeout(loadBannerAd, 1000);
+      }
+    };
     
-    const invokeScript = document.createElement('script');
-    invokeScript.type = 'text/javascript';
-    invokeScript.src = '//installerastonishment.com/874f9b580ee153b038f34d778d444072/invoke.js';
-    invokeScript.async = true;
-    
-    // Add scripts to the ad container
-    if (adRef.current) {
-      adRef.current.appendChild(script);
-      adRef.current.appendChild(invokeScript);
-    }
+    window.addEventListener('adblock-dismissed', handleAdblockDismissed);
 
     return () => {
       // Cleanup on unmount
       if (adRef.current) {
         adRef.current.innerHTML = '';
       }
+      window.removeEventListener('adblock-dismissed', handleAdblockDismissed);
     };
   }, [user]);
 
-  // Don't show ads for admin users
-  if (user && user.isAdmin) {
+  // Don't show ads for any logged in users
+  if (user) {
     return null;
   }
 

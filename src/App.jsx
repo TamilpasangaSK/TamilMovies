@@ -62,17 +62,17 @@ function App() {
                     </li>
                     <li>
                       <Link to="/trending" className="text-gray-300 hover:text-white transition-colors text-sm">
-                        About Us
+                        Trending Movies
                       </Link>
                     </li>
                     <li>
                       <Link to="/latest" className="text-gray-300 hover:text-white transition-colors text-sm">
-                        DMCA
+                        Latest Movies
                       </Link>
                     </li>
                     <li>
                       <Link to="/login" className="text-gray-300 hover:text-white transition-colors text-sm">
-                        Request A Movie
+                        Login / Register
                       </Link>
                     </li>
                   </ul>
