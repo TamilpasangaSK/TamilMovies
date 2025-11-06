@@ -52,7 +52,7 @@ const MovieDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
             <img
-              src={movie.poster}
+              src={movie.posterUrl}
               alt={movie.title}
               className="w-full rounded-lg shadow-2xl"
             />
@@ -70,12 +70,12 @@ const MovieDetail = () => {
               <span className={`px-3 py-1 rounded-full text-sm ${
                 isDark ? 'bg-blue-600' : 'bg-blue-200 text-blue-800'
               }`}>
-                {movie.genre}
+                {Array.isArray(movie.genre) ? movie.genre.join(', ') : movie.genre}
               </span>
               <span className={`px-3 py-1 rounded-full text-sm ${
                 isDark ? 'bg-green-600' : 'bg-green-200 text-green-800'
               }`}>
-                {movie.rating}
+                {movie.rating || 'N/A'}
               </span>
             </div>
 
@@ -116,13 +116,13 @@ const MovieDetail = () => {
               <div>
                 <h3 className="font-semibold mb-2">Language</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>
-                  {movie.language || 'Tamil'}
+                  {Array.isArray(movie.languages) ? movie.languages.join(', ') : (movie.language || 'Tamil')}
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">Quality</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>
-                  {movie.quality || 'HD'}
+                  {Array.isArray(movie.quality) ? movie.quality.map(q => q.format || q).join(', ') : (movie.quality || 'HD')}
                 </p>
               </div>
             </div>
